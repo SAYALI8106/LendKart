@@ -74,19 +74,19 @@ export const RentalCalendar = ({
   const totalAmount = rentalFee + securityDeposit;
 
   return (
-    <div className="glass-panel p-5 rounded-2xl border border-white/10 space-y-4">
-      <div className="flex items-center justify-between pb-3 border-b border-white/10">
-        <div className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
-          <CalendarIcon className="w-4 h-4 text-brand-primary" />
+    <div className="bg-white dark:bg-[#14211D] p-5 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-4">
+      <div className="flex items-center justify-between pb-3 border-b border-[#E7E2D6] dark:border-[#1E332B]">
+        <div className="flex items-center gap-2 text-sm font-bold text-[#17201D] dark:text-[#F8F6F0]">
+          <CalendarIcon className="w-4 h-4 text-[#176B52] dark:text-[#8EAFA0]" />
           <span>Select Rental Dates</span>
         </div>
-        <span className="text-xs text-slate-400">Dynamic Pricing</span>
+        <span className="text-xs text-[#788880] dark:text-[#7D9B8E]">Dynamic Pricing</span>
       </div>
 
       {/* Date Pickers */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label className="block text-xs font-medium text-slate-400 mb-1">
+          <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
             Pickup Date
           </label>
           <input
@@ -94,12 +94,12 @@ export const RentalCalendar = ({
             min={today}
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-sm text-white focus:outline-none focus:border-brand-primary"
+            className="w-full px-3 py-2 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-sm text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-400 mb-1">
+          <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
             Return Date
           </label>
           <input
@@ -107,50 +107,50 @@ export const RentalCalendar = ({
             min={startDate || today}
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-sm text-white focus:outline-none focus:border-brand-primary"
+            className="w-full px-3 py-2 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-sm text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
           />
         </div>
       </div>
 
       {/* Validation Message */}
       {error ? (
-        <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 px-3 py-2 rounded-xl flex items-center gap-2">
+        <div className="text-xs text-rose-700 dark:text-rose-300 bg-rose-500/10 border border-rose-500/20 px-3 py-2 rounded-xl flex items-center gap-2">
           <Info className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
       ) : (
-        <div className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-xl flex items-center gap-2">
+        <div className="text-xs text-emerald-800 dark:text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-xl flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 shrink-0" />
           <span>Item is available for these dates!</span>
         </div>
       )}
 
       {/* Live Breakdown Table */}
-      <div className="bg-white/5 rounded-xl p-3.5 space-y-2 text-xs text-slate-300">
+      <div className="bg-[#F8F6F0] dark:bg-[#0E1714] rounded-xl p-3.5 space-y-2 text-xs text-[#5C6E66] dark:text-[#A8C8B5] border border-[#E7E2D6] dark:border-[#1E332B]">
         <div className="flex justify-between items-center">
           <span>
             Rental Fee ({formatINR(pricePerDay)} × {days} {days === 1 ? 'day' : 'days'})
           </span>
-          <span className="font-semibold text-white">{formatINR(rentalFee)}</span>
+          <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{formatINR(rentalFee)}</span>
         </div>
 
-        <div className="flex justify-between items-center text-slate-400">
+        <div className="flex justify-between items-center text-[#788880] dark:text-[#7D9B8E]">
           <div className="flex items-center gap-1">
             <span>Refundable Security Deposit</span>
-            <ShieldCheck className="w-3.5 h-3.5 text-brand-secondary" />
+            <ShieldCheck className="w-3.5 h-3.5 text-[#176B52] dark:text-[#8EAFA0]" />
           </div>
-          <span>{formatINR(securityDeposit)}</span>
+          <span className="font-medium text-[#17201D] dark:text-[#F8F6F0]">{formatINR(securityDeposit)}</span>
         </div>
 
-        <div className="pt-2 border-t border-white/10 flex justify-between items-center text-sm font-bold text-white">
+        <div className="pt-2 border-t border-[#E7E2D6] dark:border-[#1E332B] flex justify-between items-center text-sm font-bold text-[#17201D] dark:text-[#F8F6F0]">
           <span>Total Estimated Amount</span>
-          <span className="text-brand-accent text-base font-display">
+          <span className="text-[#C96F52] text-base font-display">
             {formatINR(totalAmount)}
           </span>
         </div>
       </div>
 
-      <div className="text-[11px] text-slate-400 italic">
+      <div className="text-[11px] text-[#788880] dark:text-[#7D9B8E] italic">
         * Security deposit is fully refunded once the item is returned in verified condition.
       </div>
     </div>

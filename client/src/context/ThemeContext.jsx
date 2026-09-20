@@ -6,8 +6,8 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('lendkart_theme');
     if (saved) return saved;
-    // Default to dark mode for high-end futuristic aesthetic
-    return 'dark';
+    // Default to warm natural ivory & evergreen brand
+    return 'light';
   });
 
   useEffect(() => {

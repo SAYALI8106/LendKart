@@ -9,23 +9,31 @@ export default {
     extend: {
       colors: {
         background: {
-          dark: '#070A0F',
-          light: '#F8FAFC'
+          light: '#F8F6F0', // Warm Ivory / Soft Sand
+          dark: '#0E1714'   // Deep Forest Charcoal
         },
         surface: {
-          dark: '#10151D',
-          darkCard: 'rgba(255, 255, 255, 0.04)',
-          darkBorder: 'rgba(255, 255, 255, 0.08)',
-          light: '#FFFFFF',
-          lightCard: '#F1F5F9',
-          lightBorder: '#E2E8F0'
+          light: '#FFFDF9',
+          lightCard: '#FFFFFF',
+          lightBorder: '#E7E2D6',
+          dark: '#14211D',
+          darkCard: '#192924',
+          darkBorder: 'rgba(168, 200, 181, 0.12)'
         },
         brand: {
-          primary: '#7C5CFF',
-          primaryHover: '#6946F5',
-          secondary: '#00D4FF',
-          accent: '#B8FF6A',
-          glow: 'rgba(124, 92, 255, 0.35)'
+          primary: '#176B52',       // Deep Evergreen / Forest
+          primaryHover: '#125440',  // Darker Forest
+          primaryLight: '#E8F2ED',  // Tinted Sage White
+          secondary: '#8EAFA0',     // Soft Sage
+          secondaryHover: '#799A8B',
+          accent: '#C96F52',        // Warm Terracotta / Clay
+          accentHover: '#B55E42',
+          clayLight: '#FBEFEA',
+          sky: '#709DB3',           // Muted Dusty Sky
+          lavender: '#A294BD',      // Soft Heather
+          charcoal: '#17201D',      // Deep forest charcoal text
+          muted: '#63736D',         // Soft sage charcoal text
+          sand: '#F2EFE6'
         }
       },
       fontFamily: {
@@ -33,19 +41,15 @@ export default {
         display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif']
       },
       boxShadow: {
-        'neon-glow': '0 0 25px -5px rgba(124, 92, 255, 0.45)',
-        'cyan-glow': '0 0 25px -5px rgba(0, 212, 255, 0.4)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+        'soft-sm': '0 1px 3px rgba(23, 32, 29, 0.04), 0 1px 2px rgba(23, 32, 29, 0.02)',
+        'soft-md': '0 4px 16px -2px rgba(23, 32, 29, 0.06), 0 2px 6px -1px rgba(23, 32, 29, 0.04)',
+        'soft-lg': '0 12px 32px -4px rgba(23, 32, 29, 0.08), 0 4px 12px -2px rgba(23, 32, 29, 0.04)',
+        'forest-glow': '0 4px 20px -2px rgba(23, 107, 82, 0.25)',
+        'terracotta-glow': '0 4px 20px -2px rgba(201, 111, 82, 0.25)'
       },
-      animation: {
-        'float-slow': 'float 6s ease-in-out infinite',
-        'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' },
-        }
+      borderRadius: {
+        '2xl': '1rem',
+        '3xl': '1.35rem'
       }
     },
   },

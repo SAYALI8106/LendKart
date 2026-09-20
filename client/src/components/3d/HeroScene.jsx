@@ -3,52 +3,52 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, RoundedBox, Sphere, Cylinder, Torus } from '@react-three/drei';
 import FallbackHero2D from './FallbackHero2D';
 
-// 3D Model: Smart Projector
+// 3D Model: Smart Projector (Refined Industrial Design)
 const ProjectorModel = ({ position, rotation }) => {
   const meshRef = useRef();
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.4) * 0.2;
+      meshRef.current.rotation.y = Math.sin(state.clock.getElapsedTime() * 0.4) * 0.15;
     }
   });
 
   return (
     <group ref={meshRef} position={position} rotation={rotation}>
       {/* Main Projector Chassis */}
-      <RoundedBox args={[2.2, 1.1, 2.0]} radius={0.12} smoothness={4} castShadow>
-        <meshStandardMaterial color="#1a1d24" metalness={0.7} roughness={0.25} />
+      <RoundedBox args={[2.2, 1.1, 2.0]} radius={0.14} smoothness={4} castShadow>
+        <meshStandardMaterial color="#232C28" metalness={0.6} roughness={0.35} />
       </RoundedBox>
 
       {/* Front Optical Bezel */}
       <mesh position={[0, 0, 1.02]}>
         <planeGeometry args={[1.9, 0.8]} />
-        <meshStandardMaterial color="#0f1117" metalness={0.9} roughness={0.1} />
+        <meshStandardMaterial color="#18201C" metalness={0.8} roughness={0.2} />
       </mesh>
 
       {/* Projector Glass Lens */}
-      <Cylinder args={[0.38, 0.38, 0.4, 32]} rotation={[Math.PI / 2, 0, 0]} position={[-0.45, 0.05, 1.15]}>
+      <Cylinder args={[0.38, 0.38, 0.35, 32]} rotation={[Math.PI / 2, 0, 0]} position={[-0.45, 0.05, 1.12]}>
         <meshStandardMaterial
-          color="#00D4FF"
-          emissive="#00D4FF"
-          emissiveIntensity={0.6}
-          roughness={0.1}
-          metalness={0.9}
+          color="#176B52"
+          emissive="#176B52"
+          emissiveIntensity={0.4}
+          roughness={0.15}
+          metalness={0.8}
         />
       </Cylinder>
 
-      {/* Laser Light Cone Simulation */}
+      {/* Subtle Lens Projection Ambient Glow */}
       <Cylinder
-        args={[0.38, 1.2, 1.8, 32, 1, true]}
+        args={[0.38, 1.1, 1.6, 32, 1, true]}
         rotation={[-Math.PI / 2, 0, 0]}
-        position={[-0.45, 0.05, 2.1]}
+        position={[-0.45, 0.05, 2.0]}
       >
-        <meshBasicMaterial color="#00D4FF" transparent opacity={0.15} wireframe={false} />
+        <meshBasicMaterial color="#8EAFA0" transparent opacity={0.08} wireframe={false} />
       </Cylinder>
 
-      {/* Status LED */}
+      {/* Terracotta Status Indicator */}
       <Sphere args={[0.04, 16, 16]} position={[0.65, 0.4, 1.02]}>
-        <meshStandardMaterial color="#B8FF6A" emissive="#B8FF6A" emissiveIntensity={1.5} />
+        <meshStandardMaterial color="#C96F52" emissive="#C96F52" emissiveIntensity={0.8} />
       </Sphere>
     </group>
   );
@@ -59,7 +59,7 @@ const CameraModel = ({ position }) => {
   const ref = useRef();
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.y = -Math.cos(state.clock.getElapsedTime() * 0.5) * 0.3;
+      ref.current.rotation.y = -Math.cos(state.clock.getElapsedTime() * 0.4) * 0.2;
     }
   });
 
@@ -67,30 +67,30 @@ const CameraModel = ({ position }) => {
     <group ref={ref} position={position}>
       {/* Camera Body */}
       <RoundedBox args={[1.5, 1.0, 0.7]} radius={0.08} smoothness={4} castShadow>
-        <meshStandardMaterial color="#14171d" roughness={0.4} metalness={0.6} />
+        <meshStandardMaterial color="#1C2420" roughness={0.4} metalness={0.5} />
       </RoundedBox>
       {/* Viewfinder Bump */}
       <RoundedBox args={[0.5, 0.35, 0.6]} radius={0.05} position={[0, 0.55, -0.05]}>
-        <meshStandardMaterial color="#1f232d" roughness={0.3} metalness={0.7} />
+        <meshStandardMaterial color="#28332D" roughness={0.3} metalness={0.6} />
       </RoundedBox>
       {/* Pro Lens Cylinder */}
       <Cylinder args={[0.36, 0.36, 0.7, 32]} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0.6]}>
-        <meshStandardMaterial color="#2d3340" metalness={0.8} roughness={0.2} />
+        <meshStandardMaterial color="#2B3630" metalness={0.7} roughness={0.25} />
       </Cylinder>
-      {/* Gold Ring on Lens */}
+      {/* Champagne Gold Ring on Lens */}
       <Torus args={[0.37, 0.02, 16, 32]} rotation={[Math.PI / 2, 0, 0]} position={[0, 0, 0.75]}>
-        <meshStandardMaterial color="#EAB308" metalness={0.9} roughness={0.2} />
+        <meshStandardMaterial color="#D4A373" metalness={0.8} roughness={0.3} />
       </Torus>
     </group>
   );
 };
 
-// 3D Model: Wireless Gaming Controller
+// 3D Model: Wireless Gaming Controller (Evergreen Shell)
 const ControllerModel = ({ position }) => {
   const ref = useRef();
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.6) * 0.15;
+      ref.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.1;
     }
   });
 
@@ -98,22 +98,22 @@ const ControllerModel = ({ position }) => {
     <group ref={ref} position={position} rotation={[0.4, -0.4, 0.2]}>
       {/* Main Controller Shell */}
       <RoundedBox args={[1.6, 0.8, 0.4]} radius={0.16} smoothness={4} castShadow>
-        <meshStandardMaterial color="#7C5CFF" roughness={0.3} metalness={0.5} />
+        <meshStandardMaterial color="#176B52" roughness={0.4} metalness={0.3} />
       </RoundedBox>
       {/* Left Grip */}
       <Cylinder args={[0.2, 0.28, 0.9, 16]} rotation={[0, 0, -0.5]} position={[-0.7, -0.4, 0]}>
-        <meshStandardMaterial color="#181b24" roughness={0.6} />
+        <meshStandardMaterial color="#1B221E" roughness={0.6} />
       </Cylinder>
       {/* Right Grip */}
       <Cylinder args={[0.2, 0.28, 0.9, 16]} rotation={[0, 0, 0.5]} position={[0.7, -0.4, 0]}>
-        <meshStandardMaterial color="#181b24" roughness={0.6} />
+        <meshStandardMaterial color="#1B221E" roughness={0.6} />
       </Cylinder>
-      {/* Thumbsticks */}
+      {/* Thumbsticks in Sage */}
       <Cylinder args={[0.12, 0.12, 0.1, 16]} position={[-0.3, -0.05, 0.25]}>
-        <meshStandardMaterial color="#00D4FF" emissive="#00D4FF" emissiveIntensity={0.8} />
+        <meshStandardMaterial color="#8EAFA0" roughness={0.4} />
       </Cylinder>
       <Cylinder args={[0.12, 0.12, 0.1, 16]} position={[0.3, -0.15, 0.25]}>
-        <meshStandardMaterial color="#00D4FF" emissive="#00D4FF" emissiveIntensity={0.8} />
+        <meshStandardMaterial color="#8EAFA0" roughness={0.4} />
       </Cylinder>
     </group>
   );
@@ -124,7 +124,7 @@ const HeadphonesModel = ({ position }) => {
   const ref = useRef();
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.y = state.clock.getElapsedTime() * 0.3;
+      ref.current.rotation.y = state.clock.getElapsedTime() * 0.25;
     }
   });
 
@@ -132,15 +132,15 @@ const HeadphonesModel = ({ position }) => {
     <group ref={ref} position={position}>
       {/* Headband Arc */}
       <Torus args={[0.65, 0.05, 16, 32, Math.PI]} rotation={[0, 0, 0]} position={[0, 0.1, 0]}>
-        <meshStandardMaterial color="#64748b" metalness={0.9} roughness={0.1} />
+        <meshStandardMaterial color="#5E6B65" metalness={0.8} roughness={0.2} />
       </Torus>
       {/* Left Earcup */}
       <Cylinder args={[0.25, 0.25, 0.2, 24]} rotation={[0, 0, Math.PI / 2]} position={[-0.65, 0.1, 0]}>
-        <meshStandardMaterial color="#0f172a" roughness={0.5} />
+        <meshStandardMaterial color="#1C2420" roughness={0.5} />
       </Cylinder>
       {/* Right Earcup */}
       <Cylinder args={[0.25, 0.25, 0.2, 24]} rotation={[0, 0, Math.PI / 2]} position={[0.65, 0.1, 0]}>
-        <meshStandardMaterial color="#0f172a" roughness={0.5} />
+        <meshStandardMaterial color="#1C2420" roughness={0.5} />
       </Cylinder>
     </group>
   );
@@ -152,38 +152,38 @@ const InteractiveScene = ({ mouse }) => {
 
   useFrame(() => {
     if (groupRef.current) {
-      // Smooth interpolation towards mouse position
-      groupRef.current.rotation.y += (mouse.current[0] * 0.35 - groupRef.current.rotation.y) * 0.05;
-      groupRef.current.rotation.x += (-mouse.current[1] * 0.25 - groupRef.current.rotation.x) * 0.05;
+      // Gentle, smooth interpolation towards mouse position
+      groupRef.current.rotation.y += (mouse.current[0] * 0.25 - groupRef.current.rotation.y) * 0.04;
+      groupRef.current.rotation.x += (-mouse.current[1] * 0.2 - groupRef.current.rotation.x) * 0.04;
     }
   });
 
   return (
     <group ref={groupRef}>
       {/* Center 4K Projector */}
-      <Float speed={2.0} rotationIntensity={0.4} floatIntensity={0.8}>
+      <Float speed={1.8} rotationIntensity={0.3} floatIntensity={0.6}>
         <ProjectorModel position={[0, 0.1, 0]} rotation={[0.15, -0.3, 0]} />
       </Float>
 
       {/* Floating Camera Top Left */}
-      <Float speed={2.5} rotationIntensity={0.6} floatIntensity={1.2}>
-        <CameraModel position={[-2.4, 1.4, -0.5]} />
+      <Float speed={2.0} rotationIntensity={0.4} floatIntensity={0.8}>
+        <CameraModel position={[-2.3, 1.3, -0.5]} />
       </Float>
 
       {/* Floating Gaming Controller Right */}
-      <Float speed={2.2} rotationIntensity={0.5} floatIntensity={1.0}>
-        <ControllerModel position={[2.4, 0.8, -0.3]} />
+      <Float speed={1.9} rotationIntensity={0.4} floatIntensity={0.7}>
+        <ControllerModel position={[2.3, 0.7, -0.3]} />
       </Float>
 
       {/* Floating Studio Headphones Bottom Left */}
-      <Float speed={1.8} rotationIntensity={0.3} floatIntensity={0.7}>
-        <HeadphonesModel position={[-2.2, -1.2, 0.2]} />
+      <Float speed={1.6} rotationIntensity={0.25} floatIntensity={0.5}>
+        <HeadphonesModel position={[-2.1, -1.1, 0.2]} />
       </Float>
 
-      {/* Futuristic Orbiting Rental Nodes */}
-      <Float speed={3.0} floatIntensity={1.5}>
-        <Sphere args={[0.15, 16, 16]} position={[2.1, -1.3, 0.5]}>
-          <meshStandardMaterial color="#B8FF6A" emissive="#B8FF6A" emissiveIntensity={1.2} />
+      {/* Community Shared Token (Sage Orb) */}
+      <Float speed={2.2} floatIntensity={0.8}>
+        <Sphere args={[0.14, 16, 16]} position={[2.0, -1.2, 0.5]}>
+          <meshStandardMaterial color="#A8C8B5" roughness={0.2} metalness={0.1} />
         </Sphere>
       </Float>
     </group>
@@ -195,7 +195,6 @@ export const HeroScene = () => {
   const mouse = useRef([0, 0]);
 
   useEffect(() => {
-    // Check WebGL support
     try {
       const canvas = document.createElement('canvas');
       const supported = !!(
@@ -222,17 +221,17 @@ export const HeroScene = () => {
   }
 
   return (
-    <div className="relative w-full h-[480px] lg:h-[580px] select-none">
+    <div className="relative w-full h-[460px] lg:h-[540px] select-none">
       <Suspense fallback={<FallbackHero2D />}>
         <Canvas
           camera={{ position: [0, 0, 5.5], fov: 45 }}
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
         >
-          <ambientLight intensity={0.8} />
-          <directionalLight position={[5, 8, 5]} intensity={1.5} color="#ffffff" castShadow />
-          <pointLight position={[-4, -3, 2]} intensity={2.0} color="#7C5CFF" />
-          <pointLight position={[4, 2, 3]} intensity={2.5} color="#00D4FF" />
+          <ambientLight intensity={0.9} />
+          <directionalLight position={[5, 7, 5]} intensity={1.4} color="#FFFBF0" />
+          <pointLight position={[-4, -3, 2]} intensity={1.2} color="#176B52" />
+          <pointLight position={[4, 2, 3]} intensity={1.0} color="#C96F52" />
           <InteractiveScene mouse={mouse} />
         </Canvas>
       </Suspense>

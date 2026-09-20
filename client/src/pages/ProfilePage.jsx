@@ -38,128 +38,128 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <SEO
         title="User Profile & Settings"
         description="Manage your LendKart community account credentials, location, and verified badges."
       />
 
-      <div className="pb-4 border-b border-white/10">
-        <h1 className="text-2xl sm:text-3xl font-bold font-display text-white">
+      <div className="pb-4 border-b border-sand-300 dark:border-[#1E332B]">
+        <h1 className="text-2xl sm:text-3xl font-bold font-serif text-charcoal-900 dark:text-sand-100">
           Account Profile & Trust Settings
         </h1>
-        <p className="text-xs text-slate-400 mt-0.5">
-          Your public profile helps borrowers and lenders establish trust.
+        <p className="text-xs text-charcoal-500 dark:text-charcoal-400 mt-1">
+          Your public profile helps borrowers and lenders establish trust in your neighborhood.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         {/* Profile Summary Card */}
-        <div className="md:col-span-4 glass-panel p-6 rounded-3xl border border-white/10 text-center space-y-4">
+        <div className="md:col-span-4 bg-white dark:bg-[#14211D] p-6 rounded-2xl border border-sand-300/80 dark:border-[#1E332B] shadow-soft-sm text-center space-y-4">
           <div className="relative w-24 h-24 mx-auto">
             <img
               src={avatar || user?.avatar}
               alt={user?.name}
-              className="w-full h-full rounded-2xl object-cover border-2 border-brand-primary"
+              className="w-full h-full rounded-2xl object-cover border-2 border-forest-600 dark:border-forest-400"
             />
             {user?.isVerified && (
-              <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-full shadow-md" title="Verified Member">
+              <div className="absolute -bottom-1 -right-1 bg-forest-700 text-white p-1 rounded-full shadow-soft-sm" title="Verified Member">
                 <ShieldCheck className="w-4 h-4" />
               </div>
             )}
           </div>
 
           <div>
-            <h3 className="font-bold text-lg text-white font-display">{user?.name}</h3>
-            <p className="text-xs text-slate-400">{user?.email}</p>
+            <h3 className="font-bold text-lg text-charcoal-900 dark:text-sand-100 font-serif">{user?.name}</h3>
+            <p className="text-xs text-charcoal-500 dark:text-charcoal-400">{user?.email}</p>
           </div>
 
-          <div className="flex items-center justify-center gap-1 text-xs text-amber-400 bg-white/5 py-1.5 rounded-xl border border-white/5">
-            <Star className="w-4 h-4 fill-amber-400" />
-            <span className="font-bold text-white">{user?.rating || 4.9}</span>
-            <span className="text-slate-400">Community Rating</span>
+          <div className="flex items-center justify-center gap-1.5 text-xs text-amber-600 dark:text-amber-400 bg-sand-100 dark:bg-charcoal-800 py-1.5 rounded-xl border border-sand-200 dark:border-charcoal-700">
+            <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+            <span className="font-bold text-charcoal-900 dark:text-sand-100">{user?.rating || 4.9}</span>
+            <span className="text-charcoal-500 dark:text-charcoal-400 text-[11px]">• Community Rating</span>
           </div>
 
-          <div className="text-left pt-3 border-t border-white/10 text-xs space-y-2 text-slate-300">
+          <div className="text-left pt-3 border-t border-sand-200 dark:border-[#1E332B] text-xs space-y-2 text-charcoal-600 dark:text-charcoal-300">
             <div className="flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 text-brand-secondary" />
+              <MapPin className="w-3.5 h-3.5 text-forest-600 dark:text-forest-400" />
               <span>{user?.location || 'Pune, India'}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="w-3.5 h-3.5 text-brand-primary" />
+              <Phone className="w-3.5 h-3.5 text-forest-600 dark:text-forest-400" />
               <span>{user?.phone || 'Not specified'}</span>
             </div>
-            <div className="text-[11px] text-slate-500 pt-1">
+            <div className="text-[11px] text-charcoal-400 dark:text-charcoal-500 pt-1">
               Member since {formatDate(user?.createdAt)}
             </div>
           </div>
         </div>
 
         {/* Profile Edit Form */}
-        <form onSubmit={handleSubmit} className="md:col-span-8 glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-5">
-          <h3 className="text-lg font-bold font-display text-white">Edit Information</h3>
+        <form onSubmit={handleSubmit} className="md:col-span-8 bg-white dark:bg-[#14211D] p-6 sm:p-8 rounded-2xl border border-sand-300/80 dark:border-[#1E332B] shadow-soft-sm space-y-5">
+          <h3 className="text-lg font-bold font-serif text-charcoal-900 dark:text-sand-100">Edit Information</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Full Name</label>
+              <label className="block text-xs font-semibold text-charcoal-700 dark:text-sand-200 mb-1.5">Full Name</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+                className="w-full px-3 py-2.5 rounded-xl bg-sand-50/50 dark:bg-[#0E1714] border border-sand-300 dark:border-[#1E332B] text-xs text-charcoal-900 dark:text-sand-100 focus:outline-none focus:border-forest-600 focus:ring-1 focus:ring-forest-600 transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Contact Phone</label>
+              <label className="block text-xs font-semibold text-charcoal-700 dark:text-sand-200 mb-1.5">Contact Phone</label>
               <input
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+                className="w-full px-3 py-2.5 rounded-xl bg-sand-50/50 dark:bg-[#0E1714] border border-sand-300 dark:border-[#1E332B] text-xs text-charcoal-900 dark:text-sand-100 focus:outline-none focus:border-forest-600 focus:ring-1 focus:ring-forest-600 transition-colors"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">City / Location</label>
+            <label className="block text-xs font-semibold text-charcoal-700 dark:text-sand-200 mb-1.5">City / Location</label>
             <input
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+              className="w-full px-3 py-2.5 rounded-xl bg-sand-50/50 dark:bg-[#0E1714] border border-sand-300 dark:border-[#1E332B] text-xs text-charcoal-900 dark:text-sand-100 focus:outline-none focus:border-forest-600 focus:ring-1 focus:ring-forest-600 transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Avatar Image URL</label>
+            <label className="block text-xs font-semibold text-charcoal-700 dark:text-sand-200 mb-1.5">Avatar Image URL</label>
             <input
               type="text"
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+              className="w-full px-3 py-2.5 rounded-xl bg-sand-50/50 dark:bg-[#0E1714] border border-sand-300 dark:border-[#1E332B] text-xs text-charcoal-900 dark:text-sand-100 focus:outline-none focus:border-forest-600 focus:ring-1 focus:ring-forest-600 transition-colors"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Bio / Gear Interests</label>
+            <label className="block text-xs font-semibold text-charcoal-700 dark:text-sand-200 mb-1.5">Bio / Gear Interests</label>
             <textarea
               rows={3}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="w-full p-3 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary resize-none"
+              className="w-full p-3 rounded-xl bg-sand-50/50 dark:bg-[#0E1714] border border-sand-300 dark:border-[#1E332B] text-xs text-charcoal-900 dark:text-sand-100 focus:outline-none focus:border-forest-600 focus:ring-1 focus:ring-forest-600 transition-colors resize-none"
             />
           </div>
 
           {savedSuccess && (
-            <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs flex items-center gap-2">
-              <Check className="w-4 h-4 shrink-0" />
+            <div className="p-3.5 rounded-xl bg-forest-50 dark:bg-forest-950/40 border border-forest-200 dark:border-forest-800 text-forest-700 dark:text-forest-300 text-xs flex items-center gap-2">
+              <Check className="w-4 h-4 shrink-0 text-forest-600" />
               <span>Profile updated successfully!</span>
             </div>
           )}
 
           <div className="flex justify-end pt-2">
-            <Button type="submit" isLoading={isSaving} variant="primary" size="md">
+            <Button type="submit" isLoading={isSaving} variant="primary" size="md" className="shadow-soft-sm">
               <Save className="w-4 h-4 mr-1.5" />
               Save Changes
             </Button>

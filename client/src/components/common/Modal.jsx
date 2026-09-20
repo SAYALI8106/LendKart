@@ -28,16 +28,16 @@ export const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-lg' 
 
       {/* Modal Dialog */}
       <div
-        className={`relative z-10 w-full ${maxWidth} glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/15 dark:border-white/10 max-h-[90vh] overflow-y-auto`}
+        className={`relative z-10 w-full ${maxWidth} bg-white dark:bg-[#14211D] rounded-3xl p-6 sm:p-8 shadow-soft-lg border border-[#E7E2D6] dark:border-white/10 max-h-[90vh] overflow-y-auto animate-fade-up`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
+        <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#E7E2D6] dark:border-white/10">
           <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white">
             {title}
           </h3>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1.5 rounded-full text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>

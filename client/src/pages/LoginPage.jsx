@@ -33,12 +33,13 @@ export const LoginPage = () => {
 
   // Instant demo account filler
   const handleQuickDemoLogin = async (demoEmail, demoRole) => {
+    const demoPassword = demoRole === 'admin' ? 'Admin@123' : 'User@123';
     setEmail(demoEmail);
-    setPassword('Password@123');
+    setPassword(demoPassword);
     try {
       setIsLoading(true);
       setError('');
-      await login(demoEmail, 'Password@123');
+      await login(demoEmail, demoPassword);
       navigate(demoRole === 'admin' ? '/admin' : redirectPath);
     } catch (err) {
       setError('Demo login failed');
@@ -54,39 +55,39 @@ export const LoginPage = () => {
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
           <Link to="/" className="inline-block">
-            <span className="text-2xl font-bold font-display text-white">LendKart</span>
+            <span className="text-2xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">LendKart</span>
           </Link>
-          <h2 className="text-2xl font-bold font-display text-white">Welcome Back</h2>
-          <p className="text-xs text-slate-400">
+          <h2 className="text-2xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Welcome Back</h2>
+          <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">
             Sign in to manage your active rentals and listed items.
           </p>
         </div>
 
         {/* 1-Click Demo Accounts Quick Access */}
-        <div className="glass-panel p-4 rounded-2xl border border-brand-primary/30 space-y-2.5">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-brand-accent">
-            <Sparkles className="w-4 h-4" />
+        <div className="bg-white dark:bg-[#14211D] p-4 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-2.5">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#176B52] dark:text-[#8EAFA0]">
+            <Sparkles className="w-4 h-4 text-[#C96F52]" />
             <span>Instant Demo Logins (1-Click)</span>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
               onClick={() => handleQuickDemoLogin('admin@lendkart.demo', 'admin')}
-              className="py-1.5 px-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-semibold transition-colors"
+              className="py-1.5 px-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30 text-[11px] font-semibold transition-colors cursor-pointer"
             >
               Admin Demo
             </button>
             <button
               type="button"
               onClick={() => handleQuickDemoLogin('user@lendkart.demo', 'user')}
-              className="py-1.5 px-2 rounded-xl bg-brand-primary/15 hover:bg-brand-primary/25 text-brand-primary border border-brand-primary/30 text-[11px] font-semibold transition-colors"
+              className="py-1.5 px-2 rounded-xl bg-[#176B52]/10 hover:bg-[#176B52]/20 text-[#176B52] dark:text-[#8EAFA0] border border-[#176B52]/30 text-[11px] font-semibold transition-colors cursor-pointer"
             >
               Lender Demo
             </button>
             <button
               type="button"
               onClick={() => handleQuickDemoLogin('rahul@lendkart.demo', 'borrower')}
-              className="py-1.5 px-2 rounded-xl bg-brand-secondary/15 hover:bg-brand-secondary/25 text-brand-secondary border border-brand-secondary/30 text-[11px] font-semibold transition-colors"
+              className="py-1.5 px-2 rounded-xl bg-[#8EAFA0]/15 hover:bg-[#8EAFA0]/25 text-[#176B52] dark:text-[#8EAFA0] border border-[#8EAFA0]/30 text-[11px] font-semibold transition-colors cursor-pointer"
             >
               Borrower Demo
             </button>
@@ -94,53 +95,53 @@ export const LoginPage = () => {
         </div>
 
         {error && (
-          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
+          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-[#14211D] p-6 sm:p-8 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+            <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">Email Address</label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+              <Mail className="w-4 h-4 text-[#788880] dark:text-[#7D9B8E] absolute left-3 top-3" />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#17201D] dark:text-[#F8F6F0] placeholder-[#788880] dark:placeholder-[#7D9B8E] focus:outline-none focus:border-[#176B52]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1">Password</label>
+            <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">Password</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+              <Lock className="w-4 h-4 text-[#788880] dark:text-[#7D9B8E] absolute left-3 top-3" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#17201D] dark:text-[#F8F6F0] placeholder-[#788880] dark:placeholder-[#7D9B8E] focus:outline-none focus:border-[#176B52]"
               />
             </div>
           </div>
 
           <div className="pt-2">
-            <Button type="submit" isLoading={isLoading} variant="primary" size="md" className="w-full">
+            <Button type="submit" isLoading={isLoading} variant="primary" size="md" className="w-full cursor-pointer">
               <LogIn className="w-4 h-4 mr-1.5" />
               Sign In
             </Button>
           </div>
 
-          <div className="text-center text-xs text-slate-400 pt-2">
+          <div className="text-center text-xs text-[#788880] dark:text-[#7D9B8E] pt-2">
             Don't have an account?{' '}
-            <Link to="/register" className="text-brand-primary hover:underline font-semibold">
+            <Link to="/register" className="text-[#176B52] dark:text-[#8EAFA0] hover:underline font-semibold">
               Create an account
             </Link>
           </div>

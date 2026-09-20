@@ -60,7 +60,7 @@ export const DashboardPage = () => {
         const [myRentals, ownerRentals, allItems] = await Promise.all([
           rentalService.getMyRentals(borrowStatusFilter),
           rentalService.getOwnerRentals(),
-          api.get('/items').then((r) => r.data.items).catch(() => [])
+          api.get('/items?limit=100').then((r) => r.data.items).catch(() => [])
         ]);
 
         setBorrowedRentals(myRentals || []);
@@ -120,42 +120,42 @@ export const DashboardPage = () => {
       />
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E7E2D6] dark:border-[#1E332B]">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-secondary font-display">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#176B52] dark:text-[#8EAFA0] font-display">
             Activity Hub
           </span>
-          <h1 className="text-2xl sm:text-3xl font-bold font-display text-white mt-0.5">
+          <h1 className="text-2xl sm:text-3xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0] mt-0.5">
             Rental Management Dashboard
           </h1>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-[#788880] dark:text-[#7D9B8E] mt-0.5">
             Manage items you are borrowing and requests for equipment you lend.
           </p>
         </div>
 
         {/* Tab Switcher: Borrowing vs Lending */}
-        <div className="flex items-center glass-panel p-1 rounded-2xl border border-white/10 shrink-0">
+        <div className="flex items-center bg-white dark:bg-[#14211D] p-1 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm shrink-0">
           <button
             onClick={() => setActiveTab('borrowing')}
-            className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+            className={`px-5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'borrowing'
-                ? 'bg-brand-primary text-white shadow-neon-glow'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-[#176B52] text-white shadow-soft-sm'
+                : 'text-[#5C6E66] dark:text-[#A8C8B5] hover:text-[#17201D] dark:hover:text-[#F8F6F0]'
             }`}
           >
             My Rentals (Borrower)
           </button>
           <button
             onClick={() => setActiveTab('lending')}
-            className={`px-5 py-2 rounded-xl text-xs font-bold transition-all relative ${
+            className={`px-5 py-2 rounded-xl text-xs font-bold transition-all relative cursor-pointer ${
               activeTab === 'lending'
-                ? 'bg-brand-primary text-white shadow-neon-glow'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-[#176B52] text-white shadow-soft-sm'
+                : 'text-[#5C6E66] dark:text-[#A8C8B5] hover:text-[#17201D] dark:hover:text-[#F8F6F0]'
             }`}
           >
             Lender Console
             {pendingRequestsCount > 0 && (
-              <span className="ml-1.5 px-1.5 py-0.2 rounded-full bg-brand-accent text-slate-950 text-[10px] font-bold">
+              <span className="ml-1.5 px-1.5 py-0.5 rounded-full bg-[#C96F52] text-white text-[10px] font-bold">
                 {pendingRequestsCount}
               </span>
             )}
@@ -172,10 +172,10 @@ export const DashboardPage = () => {
               <button
                 key={status}
                 onClick={() => setBorrowStatusFilter(status)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
                   borrowStatusFilter === status
-                    ? 'bg-white text-slate-950 font-bold'
-                    : 'glass-card text-slate-400 hover:text-white'
+                    ? 'bg-[#176B52] text-white font-bold shadow-soft-sm'
+                    : 'bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] text-[#5C6E66] dark:text-[#A8C8B5] hover:border-[#176B52]/40'
                 }`}
               >
                 {status}
@@ -196,14 +196,14 @@ export const DashboardPage = () => {
               {borrowedRentals.map((rental) => (
                 <div
                   key={rental._id}
-                  className="glass-card rounded-2xl p-5 border border-white/10 flex flex-col justify-between space-y-4"
+                  className="bg-white dark:bg-[#14211D] rounded-2xl p-5 border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm flex flex-col justify-between space-y-4"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${getStatusBadgeClass(rental.status)}`}>
                         {rental.status}
                       </span>
-                      <span className="text-xs text-slate-400">
+                      <span className="text-xs text-[#788880] dark:text-[#7D9B8E]">
                         {formatDate(rental.createdAt)}
                       </span>
                     </div>
@@ -212,50 +212,50 @@ export const DashboardPage = () => {
                       <img
                         src={rental.item?.images?.[0] || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80'}
                         alt={rental.item?.title}
-                        className="w-16 h-16 rounded-xl object-cover border border-white/10"
+                        className="w-16 h-16 rounded-xl object-cover border border-[#E7E2D6] dark:border-[#1E332B]"
                       />
                       <div className="flex-1 min-w-0">
                         <Link
                           to={`/items/${rental.item?._id}`}
-                          className="font-bold text-sm text-white hover:text-brand-primary line-clamp-1 transition-colors"
+                          className="font-bold text-sm text-[#17201D] dark:text-[#F8F6F0] hover:text-[#176B52] dark:hover:text-[#8EAFA0] line-clamp-1 transition-colors"
                         >
                           {rental.item?.title}
                         </Link>
-                        <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                          <MapPin className="w-3 h-3 text-brand-secondary" />
+                        <p className="text-xs text-[#788880] dark:text-[#7D9B8E] flex items-center gap-1 mt-0.5">
+                          <MapPin className="w-3 h-3 text-[#176B52] dark:text-[#8EAFA0]" />
                           <span>{rental.item?.location}</span>
                         </p>
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-white/5 text-xs space-y-1 text-slate-300">
+                    <div className="p-3 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs space-y-1 text-[#5C6E66] dark:text-[#A8C8B5]">
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Dates:</span>
-                        <span className="font-semibold text-white">
+                        <span className="text-[#788880] dark:text-[#7D9B8E]">Dates:</span>
+                        <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">
                           {formatDate(rental.startDate)} → {formatDate(rental.endDate)}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-400">Duration:</span>
+                        <span className="text-[#788880] dark:text-[#7D9B8E]">Duration:</span>
                         <span>{rental.numberOfDays} {rental.numberOfDays === 1 ? 'day' : 'days'}</span>
                       </div>
-                      <div className="flex justify-between pt-1 border-t border-white/5 font-bold text-white">
+                      <div className="flex justify-between pt-1 border-t border-[#E7E2D6] dark:border-[#1E332B] font-bold text-[#17201D] dark:text-[#F8F6F0]">
                         <span>Total:</span>
-                        <span className="text-brand-accent">{formatINR(rental.totalAmount)}</span>
+                        <span className="text-[#C96F52] font-display">{formatINR(rental.totalAmount)}</span>
                       </div>
                     </div>
 
                     {rental.owner && (
-                      <div className="flex items-center gap-2 pt-1 text-xs text-slate-400">
-                        <span className="text-slate-500">Lender:</span>
-                        <span className="font-medium text-slate-200">{rental.owner.name}</span>
+                      <div className="flex items-center gap-2 pt-1 text-xs text-[#788880] dark:text-[#7D9B8E]">
+                        <span>Lender:</span>
+                        <span className="font-medium text-[#17201D] dark:text-[#F8F6F0]">{rental.owner.name}</span>
                         <span>({rental.owner.phone})</span>
                       </div>
                     )}
                   </div>
 
                   {/* Actions for Borrower */}
-                  <div className="pt-2 border-t border-white/5 flex gap-2">
+                  <div className="pt-2 border-t border-[#E7E2D6] dark:border-[#1E332B] flex gap-2">
                     {rental.status === 'Pending' && (
                       <Button
                         onClick={() =>
@@ -269,7 +269,7 @@ export const DashboardPage = () => {
                         }
                         variant="outline"
                         size="sm"
-                        className="w-full text-rose-400 border-rose-500/20"
+                        className="w-full text-rose-700 dark:text-rose-300 border-rose-500/20 hover:bg-rose-50 dark:hover:bg-rose-950/20"
                       >
                         Cancel Request
                       </Button>
@@ -277,7 +277,7 @@ export const DashboardPage = () => {
                     {rental.status === 'Completed' && (
                       <Link to={`/items/${rental.item?._id}`} className="w-full">
                         <Button variant="secondary" size="sm" className="w-full">
-                          <Star className="w-3.5 h-3.5 mr-1 text-amber-400 fill-amber-400" />
+                          <Star className="w-3.5 h-3.5 mr-1 text-amber-500 fill-amber-500" />
                           Leave Review
                         </Button>
                       </Link>
@@ -295,40 +295,40 @@ export const DashboardPage = () => {
         <div className="space-y-8">
           {/* Owner Metrics Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="glass-card p-5 rounded-2xl border border-white/10 space-y-1">
-              <span className="text-xs text-slate-400">Total Listed Gear</span>
-              <div className="text-2xl font-bold font-display text-white">{myItems.length}</div>
+            <div className="bg-white dark:bg-[#14211D] p-5 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-1">
+              <span className="text-xs text-[#788880] dark:text-[#7D9B8E] font-medium">Total Listed Gear</span>
+              <div className="text-2xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">{myItems.length}</div>
             </div>
-            <div className="glass-card p-5 rounded-2xl border border-white/10 space-y-1">
-              <span className="text-xs text-slate-400">Pending Requests</span>
-              <div className="text-2xl font-bold font-display text-amber-400">{pendingRequestsCount}</div>
+            <div className="bg-white dark:bg-[#14211D] p-5 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-1">
+              <span className="text-xs text-[#788880] dark:text-[#7D9B8E] font-medium">Pending Requests</span>
+              <div className="text-2xl font-bold font-display text-amber-700 dark:text-amber-300">{pendingRequestsCount}</div>
             </div>
-            <div className="glass-card p-5 rounded-2xl border border-white/10 space-y-1">
-              <span className="text-xs text-slate-400">Active Rentals</span>
-              <div className="text-2xl font-bold font-display text-emerald-400">{activeRentalsCount}</div>
+            <div className="bg-white dark:bg-[#14211D] p-5 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-1">
+              <span className="text-xs text-[#788880] dark:text-[#7D9B8E] font-medium">Active Rentals</span>
+              <div className="text-2xl font-bold font-display text-emerald-700 dark:text-emerald-400">{activeRentalsCount}</div>
             </div>
-            <div className="glass-card p-5 rounded-2xl border border-white/10 space-y-1">
-              <span className="text-xs text-slate-400">Total Earnings</span>
-              <div className="text-2xl font-bold font-display text-brand-accent">{formatINR(totalEarnings)}</div>
+            <div className="bg-white dark:bg-[#14211D] p-5 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-1">
+              <span className="text-xs text-[#788880] dark:text-[#7D9B8E] font-medium">Total Earnings</span>
+              <div className="text-2xl font-bold font-display text-[#C96F52]">{formatINR(totalEarnings)}</div>
             </div>
           </div>
 
           {/* Section: Incoming Rental Requests (Approve / Reject) */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold font-display text-white">
+              <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">
                 Incoming Rental Requests ({ownerRequests.length})
               </h3>
             </div>
 
             {ownerRequests.length === 0 ? (
-              <div className="p-8 text-center text-xs text-slate-400 glass-card rounded-2xl border border-white/5">
+              <div className="p-8 text-center text-xs text-[#788880] dark:text-[#7D9B8E] bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] rounded-2xl">
                 No rental requests received yet.
               </div>
             ) : (
-              <div className="glass-panel rounded-2xl border border-white/10 overflow-x-auto">
+              <div className="bg-white dark:bg-[#14211D] rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-white/5 text-slate-400 uppercase tracking-wider font-semibold border-b border-white/10">
+                  <thead className="bg-[#F8F6F0] dark:bg-[#0E1714] text-[#5C6E66] dark:text-[#A8C8B5] uppercase tracking-wider font-semibold border-b border-[#E7E2D6] dark:border-[#1E332B]">
                     <tr>
                       <th className="p-4">Item</th>
                       <th className="p-4">Borrower</th>
@@ -338,10 +338,10 @@ export const DashboardPage = () => {
                       <th className="p-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5 text-slate-300">
+                  <tbody className="divide-y divide-[#E7E2D6] dark:divide-[#1E332B] text-[#5C6E66] dark:text-[#A8C8B5]">
                     {ownerRequests.map((req) => (
-                      <tr key={req._id} className="hover:bg-white/5 transition-colors">
-                        <td className="p-4 font-semibold text-white max-w-xs truncate">
+                      <tr key={req._id} className="hover:bg-[#F8F6F0] dark:hover:bg-[#0E1714]/60 transition-colors">
+                        <td className="p-4 font-semibold text-[#17201D] dark:text-[#F8F6F0] max-w-xs truncate">
                           {req.item?.title}
                         </td>
                         <td className="p-4">
@@ -349,15 +349,15 @@ export const DashboardPage = () => {
                             <img
                               src={req.borrower?.avatar}
                               alt=""
-                              className="w-6 h-6 rounded-full object-cover"
+                              className="w-6 h-6 rounded-full object-cover border border-[#E7E2D6] dark:border-[#1E332B]"
                             />
-                            <span>{req.borrower?.name}</span>
+                            <span className="text-[#17201D] dark:text-[#F8F6F0] font-medium">{req.borrower?.name}</span>
                           </div>
                         </td>
                         <td className="p-4">
                           {formatDate(req.startDate)} → {formatDate(req.endDate)} ({req.numberOfDays}d)
                         </td>
-                        <td className="p-4 font-bold text-brand-accent">
+                        <td className="p-4 font-bold text-[#C96F52] font-display">
                           {formatINR(req.rentalFee)}
                         </td>
                         <td className="p-4">
@@ -377,7 +377,7 @@ export const DashboardPage = () => {
                                     rentalTitle: req.item?.title
                                   })
                                 }
-                                className="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 font-semibold border border-emerald-500/30"
+                                className="px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-500/25 font-semibold border border-emerald-500/30 cursor-pointer"
                               >
                                 Approve
                               </button>
@@ -390,7 +390,7 @@ export const DashboardPage = () => {
                                     rentalTitle: req.item?.title
                                   })
                                 }
-                                className="px-3 py-1 rounded-lg bg-rose-500/20 text-rose-400 hover:bg-rose-500/30 font-semibold border border-rose-500/30"
+                                className="px-3 py-1 rounded-lg bg-rose-500/15 text-rose-800 dark:text-rose-300 hover:bg-rose-500/25 font-semibold border border-rose-500/30 cursor-pointer"
                               >
                                 Reject
                               </button>
@@ -406,7 +406,7 @@ export const DashboardPage = () => {
                                   rentalTitle: req.item?.title
                                 })
                               }
-                              className="px-3 py-1 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 font-semibold border border-blue-500/30"
+                              className="px-3 py-1 rounded-lg bg-[#176B52]/15 text-[#176B52] dark:text-[#8EAFA0] hover:bg-[#176B52]/25 font-semibold border border-[#176B52]/30 cursor-pointer"
                             >
                               Mark Returned
                             </button>
@@ -421,11 +421,11 @@ export const DashboardPage = () => {
           </div>
 
           {/* Section: My Listed Items */}
-          <div className="space-y-4 pt-6 border-t border-white/10">
+          <div className="space-y-4 pt-6 border-t border-[#E7E2D6] dark:border-[#1E332B]">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-bold font-display text-white">My Listed Equipment</h3>
-                <p className="text-xs text-slate-400">Items you have made available for the community to rent</p>
+                <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">My Listed Equipment</h3>
+                <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">Items you have made available for the community to rent</p>
               </div>
               <Link to="/list-item">
                 <Button variant="primary" size="sm">
@@ -436,27 +436,27 @@ export const DashboardPage = () => {
             </div>
 
             {myItems.length === 0 ? (
-              <div className="p-8 text-center text-xs text-slate-400 glass-card rounded-2xl border border-white/5">
+              <div className="p-8 text-center text-xs text-[#788880] dark:text-[#7D9B8E] bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] rounded-2xl">
                 You haven't listed any items yet.
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {myItems.map((item) => (
-                  <div key={item._id} className="glass-card p-4 rounded-2xl border border-white/10 space-y-3">
+                  <div key={item._id} className="bg-white dark:bg-[#14211D] p-4 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-3">
                     <img
                       src={item.images?.[0]}
                       alt={item.title}
                       className="w-full h-32 rounded-xl object-cover"
                     />
                     <div>
-                      <h4 className="font-bold text-sm text-white line-clamp-1">{item.title}</h4>
-                      <p className="text-xs text-brand-accent font-bold mt-1">
+                      <h4 className="font-bold text-sm text-[#17201D] dark:text-[#F8F6F0] line-clamp-1">{item.title}</h4>
+                      <p className="text-xs text-[#176B52] dark:text-[#8EAFA0] font-bold mt-1">
                         {formatINR(item.pricePerDay)} /day
                       </p>
                     </div>
-                    <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs">
-                      <span className="text-emerald-400">● {item.status}</span>
-                      <Link to={`/items/${item._id}`} className="text-brand-primary hover:underline">
+                    <div className="pt-2 border-t border-[#E7E2D6] dark:border-[#1E332B] flex items-center justify-between text-xs">
+                      <span className="text-emerald-700 dark:text-emerald-400 font-medium">● {item.status}</span>
+                      <Link to={`/items/${item._id}`} className="text-[#176B52] dark:text-[#8EAFA0] font-semibold hover:underline">
                         View
                       </Link>
                     </div>

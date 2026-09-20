@@ -88,23 +88,23 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Request Item Rental" maxWidth="max-w-xl">
       {/* Progress Indicator */}
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+      <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#E7E2D6] dark:border-[#1E332B]">
         {stepsList.map((s, idx) => (
           <div key={s.num} className="flex items-center gap-2">
             <div
               className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
                 step > s.num
-                  ? 'bg-emerald-500 text-white'
+                  ? 'bg-[#176B52] text-white'
                   : step === s.num
-                  ? 'bg-brand-primary text-white shadow-neon-glow'
-                  : 'bg-white/10 text-slate-400'
+                  ? 'bg-[#176B52] text-white shadow-soft-sm'
+                  : 'bg-[#F4F1EA] dark:bg-[#1E332B] text-[#788880] dark:text-[#7D9B8E]'
               }`}
             >
               {step > s.num ? <Check className="w-3.5 h-3.5" /> : s.num}
             </div>
             <span
               className={`text-xs hidden sm:inline font-medium ${
-                step >= s.num ? 'text-white' : 'text-slate-500'
+                step >= s.num ? 'text-[#17201D] dark:text-[#F8F6F0]' : 'text-[#788880] dark:text-[#7D9B8E]'
               }`}
             >
               {s.title}
@@ -112,7 +112,7 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
             {idx < stepsList.length - 1 && (
               <div
                 className={`w-8 sm:w-12 h-0.5 mx-1 transition-colors ${
-                  step > s.num ? 'bg-emerald-500' : 'bg-white/10'
+                  step > s.num ? 'bg-[#176B52]' : 'bg-[#E7E2D6] dark:bg-[#1E332B]'
                 }`}
               />
             )}
@@ -121,7 +121,7 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
       </div>
 
       {error && (
-        <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
+        <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -130,16 +130,16 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
       {/* Step 1: Calendar & Date Selection */}
       {step === 1 && (
         <div className="space-y-4">
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B]">
             <img
               src={item?.images?.[0]}
               alt={item?.title}
               className="w-14 h-14 rounded-lg object-cover"
             />
             <div>
-              <h4 className="text-sm font-semibold text-white line-clamp-1">{item?.title}</h4>
-              <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                <MapPin className="w-3 h-3 text-brand-secondary" />
+              <h4 className="text-sm font-semibold text-[#17201D] dark:text-[#F8F6F0] line-clamp-1">{item?.title}</h4>
+              <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] flex items-center gap-1 mt-0.5">
+                <MapPin className="w-3 h-3 text-[#176B52] dark:text-[#8EAFA0]" />
                 {item?.location}
               </p>
             </div>
@@ -170,7 +170,7 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
       {step === 2 && (
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-2">
+            <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-2">
               Pickup & Return Method
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -180,12 +180,12 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
                   onClick={() => setDeliveryOption(option)}
                   className={`p-4 rounded-xl border cursor-pointer text-center transition-all ${
                     deliveryOption === option
-                      ? 'border-brand-primary bg-brand-primary/10 text-white'
-                      : 'border-white/10 bg-white/5 text-slate-400 hover:border-white/20'
+                      ? 'border-[#176B52] bg-[#176B52]/10 text-[#176B52] dark:text-[#8EAFA0]'
+                      : 'border-[#E7E2D6] dark:border-[#1E332B] bg-[#F8F6F0] dark:bg-[#0E1714] text-[#5C6E66] dark:text-[#A8C8B5] hover:border-[#176B52]/30'
                   }`}
                 >
                   <div className="font-semibold text-sm">{option}</div>
-                  <div className="text-[11px] text-slate-400 mt-1">
+                  <div className="text-[11px] text-[#788880] dark:text-[#7D9B8E] mt-1">
                     {option === 'Self Pickup'
                       ? `Meet at ${item?.location}`
                       : 'Coordinate direct drop-off'}
@@ -196,7 +196,7 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
               Message for Lender (Optional)
             </label>
             <textarea
@@ -204,13 +204,13 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
               value={borrowerNote}
               onChange={(e) => setBorrowerNote(e.target.value)}
               placeholder="Tell the owner what project or occasion you need this item for..."
-              className="w-full p-3 rounded-xl bg-slate-900/60 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary resize-none"
+              className="w-full p-3 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-sm text-[#17201D] dark:text-[#F8F6F0] placeholder-[#788880] dark:placeholder-[#7D9B8E] focus:outline-none focus:border-[#176B52] resize-none"
             />
           </div>
 
-          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300 space-y-1">
+          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-800 dark:text-amber-300 space-y-1">
             <div className="font-semibold">Lender Rules & Courtesy:</div>
-            <ul className="list-disc list-inside space-y-0.5 text-slate-300 text-[11px]">
+            <ul className="list-disc list-inside space-y-0.5 text-[#5C6E66] dark:text-[#A8C8B5] text-[11px]">
               {item?.rentalRules?.map((rule, idx) => (
                 <li key={idx}>{rule}</li>
               ))}
@@ -233,49 +233,49 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
       {/* Step 3: Final Breakdown & Confirmation */}
       {step === 3 && (
         <div className="space-y-4">
-          <div className="glass-panel p-4 rounded-xl border border-white/10 space-y-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider font-display">
+          <div className="bg-[#F8F6F0] dark:bg-[#0E1714] p-4 rounded-xl border border-[#E7E2D6] dark:border-[#1E332B] space-y-3">
+            <h4 className="text-sm font-bold text-[#17201D] dark:text-[#F8F6F0] uppercase tracking-wider font-display">
               Rental Summary
             </h4>
-            <div className="flex justify-between text-xs text-slate-300">
-              <span className="text-slate-400">Item:</span>
-              <span className="font-medium text-white">{item?.title}</span>
+            <div className="flex justify-between text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
+              <span>Item:</span>
+              <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{item?.title}</span>
             </div>
-            <div className="flex justify-between text-xs text-slate-300">
-              <span className="text-slate-400">Duration:</span>
-              <span className="font-medium text-white">
+            <div className="flex justify-between text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
+              <span>Duration:</span>
+              <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">
                 {formatDate(dateDetails?.startDate)} → {formatDate(dateDetails?.endDate)} ({dateDetails?.days} days)
               </span>
             </div>
-            <div className="flex justify-between text-xs text-slate-300">
-              <span className="text-slate-400">Pickup Location:</span>
-              <span className="font-medium text-white">{item?.location}</span>
+            <div className="flex justify-between text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
+              <span>Pickup Location:</span>
+              <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{item?.location}</span>
             </div>
-            <div className="flex justify-between text-xs text-slate-300">
-              <span className="text-slate-400">Delivery Option:</span>
-              <span className="font-medium text-white">{deliveryOption}</span>
+            <div className="flex justify-between text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
+              <span>Delivery Option:</span>
+              <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{deliveryOption}</span>
             </div>
 
-            <div className="pt-3 border-t border-white/10 space-y-2">
-              <div className="flex justify-between text-xs text-slate-300">
+            <div className="pt-3 border-t border-[#E7E2D6] dark:border-[#1E332B] space-y-2">
+              <div className="flex justify-between text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
                 <span>Rental Charge</span>
-                <span>{formatINR(dateDetails?.rentalFee)}</span>
+                <span className="font-medium text-[#17201D] dark:text-[#F8F6F0]">{formatINR(dateDetails?.rentalFee)}</span>
               </div>
-              <div className="flex justify-between text-xs text-slate-400">
+              <div className="flex justify-between text-xs text-[#788880] dark:text-[#7D9B8E]">
                 <span>Security Deposit (Refundable)</span>
                 <span>{formatINR(dateDetails?.securityDeposit)}</span>
               </div>
-              <div className="flex justify-between text-base font-bold text-white pt-2 border-t border-white/10">
+              <div className="flex justify-between text-base font-bold text-[#17201D] dark:text-[#F8F6F0] pt-2 border-t border-[#E7E2D6] dark:border-[#1E332B]">
                 <span>Total Payable</span>
-                <span className="text-brand-accent font-display">
+                <span className="text-[#C96F52] font-display">
                   {formatINR(dateDetails?.totalAmount)}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 p-3 rounded-xl bg-brand-primary/10 border border-brand-primary/20 text-xs text-brand-primary">
-            <ShieldCheck className="w-5 h-5 shrink-0 text-brand-secondary" />
+          <div className="flex items-center gap-2 p-3 rounded-xl bg-[#176B52]/10 border border-[#176B52]/20 text-xs text-[#176B52] dark:text-[#8EAFA0]">
+            <ShieldCheck className="w-5 h-5 shrink-0" />
             <span>
               No payment is deducted until the owner reviews and approves your request.
             </span>
@@ -301,19 +301,19 @@ export const RentalRequestModal = ({ isOpen, onClose, item, bookedRanges = [], o
       {/* Step 4: Submission Success */}
       {step === 4 && (
         <div className="text-center py-6 space-y-4">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto shadow-lg shadow-emerald-500/20">
+          <div className="w-16 h-16 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto shadow-sm">
             <Check className="w-8 h-8" />
           </div>
-          <h3 className="text-xl font-bold font-display text-white">
+          <h3 className="text-xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">
             Rental Request Sent! 🎉
           </h3>
-          <p className="text-xs text-slate-300 max-w-sm mx-auto">
-            Your request for <span className="font-semibold text-white">{item?.title}</span> has been forwarded to the owner. Status is currently:
+          <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] max-w-sm mx-auto">
+            Your request for <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{item?.title}</span> has been forwarded to the owner. Status is currently:
           </p>
-          <div className="inline-block px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold tracking-wide">
+          <div className="inline-block px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-800 dark:text-amber-300 text-xs font-bold tracking-wide">
             Pending Owner Approval
           </div>
-          <div className="text-[11px] text-slate-400">
+          <div className="text-[11px] text-[#788880] dark:text-[#7D9B8E]">
             You will receive a notification as soon as the owner confirms your booking.
           </div>
           <div className="pt-4">

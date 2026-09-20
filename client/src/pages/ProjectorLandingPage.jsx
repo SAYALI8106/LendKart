@@ -63,32 +63,32 @@ export const ProjectorLandingPage = () => {
 
       {/* 1. HIGH-CONVERSION HERO */}
       <section className="relative overflow-hidden pt-8 pb-12">
-        <div className="ambient-glow-purple -top-20 left-1/4" />
+        <div className="absolute top-0 left-1/3 w-80 h-80 rounded-full bg-[#176B52]/5 dark:bg-[#176B52]/10 blur-3xl pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/15 border border-brand-primary/30 text-brand-primary text-xs font-bold">
-            <Zap className="w-4 h-4 text-brand-accent" />
-            <span>Google Ads Exclusive • Pune & Mumbai Delivery</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] text-[#176B52] dark:text-[#8EAFA0] text-xs font-bold shadow-soft-sm">
+            <Zap className="w-4 h-4 text-[#C96F52]" />
+            <span>Local Neighborhood Rentals • Pune & Mumbai Metro</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display text-white tracking-tight leading-[1.08]">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display text-[#17201D] dark:text-[#F8F6F0] tracking-tight leading-[1.08]">
             Need a Projector for One Day?{' '}
-            <span className="gradient-accent block">Don't Buy One.</span>
+            <span className="text-[#176B52] dark:text-[#8EAFA0] block">Don't Buy One.</span>
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Rent high-lumen 1080p and 4K laser projectors starting from just <span className="text-brand-accent font-bold">₹350/day</span>. Perfect for terrace movie nights, college fests, gaming tournaments, and match watch parties.
+          <p className="text-base sm:text-xl text-[#5C6E66] dark:text-[#A8C8B5] max-w-2xl mx-auto leading-relaxed">
+            Rent high-lumen 1080p and 4K laser projectors starting from just <span className="text-[#C96F52] font-bold">₹350/day</span>. Perfect for terrace movie nights, college fests, gaming tournaments, and match watch parties.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/explore?category=electronics&search=projector">
-              <Button variant="accent" size="lg" className="w-full sm:w-auto text-base font-bold shadow-neon-glow">
+              <Button variant="accent" size="lg" className="w-full sm:w-auto text-base font-bold shadow-soft-sm cursor-pointer">
                 <span>Find a Projector Near You</span>
                 <ArrowRight className="w-5 h-5 ml-1" />
               </Button>
             </Link>
-            <div className="text-xs text-slate-400 flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-emerald-400" />
+            <div className="text-xs text-[#788880] dark:text-[#7D9B8E] flex items-center gap-1.5">
+              <Clock className="w-4 h-4 text-[#176B52] dark:text-[#8EAFA0]" />
               <span>Available for pickup in 2 hours</span>
             </div>
           </div>
@@ -97,63 +97,63 @@ export const ProjectorLandingPage = () => {
 
       {/* 2. COST COMPARISON TABLE (BUY VS RENT) */}
       <section className="max-w-4xl mx-auto px-4">
-        <div className="glass-panel p-6 sm:p-10 rounded-3xl border border-white/10 shadow-2xl space-y-6">
+        <div className="bg-white dark:bg-[#14211D] p-6 sm:p-10 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-2xl font-bold font-display text-white">
+            <h2 className="text-2xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">
               The Smart Math: Buying vs. Renting
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">
               Why lock up thousands of rupees for gear you only use 3 or 4 weekends a year?
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
             {/* Buying Box */}
-            <div className="p-6 rounded-2xl bg-rose-500/5 border border-rose-500/20 space-y-3">
-              <div className="text-xs uppercase font-bold text-rose-400 tracking-wider">
+            <div className="p-6 rounded-2xl bg-[#FBF9F5] dark:bg-[#0E1714] border border-rose-500/20 space-y-3">
+              <div className="text-xs uppercase font-bold text-rose-700 dark:text-rose-400 tracking-wider">
                 Option A: Buying New
               </div>
-              <div className="text-3xl font-extrabold text-white font-display">
+              <div className="text-3xl font-extrabold text-[#17201D] dark:text-[#F8F6F0] font-display">
                 ₹45,000+
               </div>
-              <ul className="space-y-2 text-xs text-slate-300">
-                <li className="flex items-center gap-2 text-rose-300">
+              <ul className="space-y-2 text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
+                <li className="flex items-center gap-2 text-rose-600 dark:text-rose-400">
                   <span>✕</span> Instant capital lockup
                 </li>
-                <li className="flex items-center gap-2 text-rose-300">
+                <li className="flex items-center gap-2 text-rose-600 dark:text-rose-400">
                   <span>✕</span> Lamp degradation & maintenance
                 </li>
-                <li className="flex items-center gap-2 text-rose-300">
+                <li className="flex items-center gap-2 text-rose-600 dark:text-rose-400">
                   <span>✕</span> Clutters closet for 360 days a year
                 </li>
-                <li className="flex items-center gap-2 text-rose-300">
+                <li className="flex items-center gap-2 text-rose-600 dark:text-rose-400">
                   <span>✕</span> 40% value depreciation in 12 months
                 </li>
               </ul>
             </div>
 
             {/* Renting on LendKart Box */}
-            <div className="p-6 rounded-2xl bg-brand-primary/10 border border-brand-primary/40 space-y-3 relative overflow-hidden shadow-neon-glow">
-              <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-brand-accent text-slate-950 text-[10px] font-bold">
+            <div className="p-6 rounded-2xl bg-[#176B52]/10 border border-[#176B52]/30 space-y-3 relative overflow-hidden shadow-soft-sm">
+              <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-[#C96F52] text-white text-[10px] font-bold">
                 RECOMMENDED
               </div>
-              <div className="text-xs uppercase font-bold text-brand-primary tracking-wider">
+              <div className="text-xs uppercase font-bold text-[#176B52] dark:text-[#8EAFA0] tracking-wider">
                 Option B: LendKart Rental
               </div>
-              <div className="text-3xl font-extrabold text-brand-accent font-display">
+              <div className="text-3xl font-extrabold text-[#176B52] dark:text-[#8EAFA0] font-display">
                 ₹450 / day
               </div>
-              <ul className="space-y-2 text-xs text-slate-200">
-                <li className="flex items-center gap-2 text-emerald-400">
+              <ul className="space-y-2 text-xs text-[#17201D] dark:text-[#EAEFE9]">
+                <li className="flex items-center gap-2 text-[#176B52] dark:text-[#8EAFA0] font-medium">
                   <CheckCircle2 className="w-4 h-4 shrink-0" /> Save over 98% upfront cash
                 </li>
-                <li className="flex items-center gap-2 text-emerald-400">
+                <li className="flex items-center gap-2 text-[#176B52] dark:text-[#8EAFA0] font-medium">
                   <CheckCircle2 className="w-4 h-4 shrink-0" /> Pristine condition pre-tested gear
                 </li>
-                <li className="flex items-center gap-2 text-emerald-400">
+                <li className="flex items-center gap-2 text-[#176B52] dark:text-[#8EAFA0] font-medium">
                   <CheckCircle2 className="w-4 h-4 shrink-0" /> HDMI + Screen bundles included
                 </li>
-                <li className="flex items-center gap-2 text-emerald-400">
+                <li className="flex items-center gap-2 text-[#176B52] dark:text-[#8EAFA0] font-medium">
                   <CheckCircle2 className="w-4 h-4 shrink-0" /> Zero maintenance or storage headache
                 </li>
               </ul>
@@ -165,13 +165,13 @@ export const ProjectorLandingPage = () => {
       {/* 3. FEATURED PROJECTORS NEAR YOU */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-primary font-display">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#176B52] dark:text-[#8EAFA0] font-display">
             Instant Availability
           </span>
-          <h2 className="text-3xl font-bold font-display text-white">
+          <h2 className="text-3xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">
             Available Projectors in Pune & Mumbai
           </h2>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">
             Book now for today or reserve for your upcoming weekend event.
           </p>
         </div>
@@ -185,21 +185,21 @@ export const ProjectorLandingPage = () => {
 
       {/* 4. TRUST & ACCREDITATION */}
       <section className="max-w-5xl mx-auto px-4">
-        <div className="glass-card p-8 rounded-3xl border border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+        <div className="bg-white dark:bg-[#14211D] p-8 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] grid grid-cols-1 sm:grid-cols-3 gap-6 text-center shadow-soft-sm">
           <div className="space-y-2">
-            <ShieldCheck className="w-8 h-8 text-brand-secondary mx-auto" />
-            <h4 className="font-bold text-sm text-white font-display">100% Verified Lenders</h4>
-            <p className="text-xs text-slate-400">Every equipment owner completes government ID verification.</p>
+            <ShieldCheck className="w-8 h-8 text-[#176B52] dark:text-[#8EAFA0] mx-auto" />
+            <h4 className="font-bold text-sm text-[#17201D] dark:text-[#F8F6F0] font-display">100% Verified Lenders</h4>
+            <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">Every equipment owner completes government ID verification.</p>
           </div>
           <div className="space-y-2">
-            <DollarSign className="w-8 h-8 text-brand-accent mx-auto" />
-            <h4 className="font-bold text-sm text-white font-display">Safe Security Deposits</h4>
-            <p className="text-xs text-slate-400">Deposits are held safely and refunded immediately upon return.</p>
+            <DollarSign className="w-8 h-8 text-[#C96F52] mx-auto" />
+            <h4 className="font-bold text-sm text-[#17201D] dark:text-[#F8F6F0] font-display">Safe Security Deposits</h4>
+            <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">Deposits are held safely and refunded immediately upon return.</p>
           </div>
           <div className="space-y-2">
-            <Star className="w-8 h-8 text-amber-400 fill-amber-400 mx-auto" />
-            <h4 className="font-bold text-sm text-white font-display">4.9/5 Star Community</h4>
-            <p className="text-xs text-slate-400">Over 500+ successful equipment rentals completed this year.</p>
+            <Star className="w-8 h-8 text-amber-500 fill-amber-500 mx-auto" />
+            <h4 className="font-bold text-sm text-[#17201D] dark:text-[#F8F6F0] font-display">4.9/5 Star Community</h4>
+            <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">Over 500+ successful equipment rentals completed this year.</p>
           </div>
         </div>
       </section>
@@ -207,8 +207,8 @@ export const ProjectorLandingPage = () => {
       {/* 5. FAQS ACCORDION */}
       <section className="max-w-3xl mx-auto px-4 space-y-6">
         <div className="text-center space-y-1">
-          <h2 className="text-2xl font-bold font-display text-white">Frequently Asked Questions</h2>
-          <p className="text-xs text-slate-400">Everything you need to know about projector rentals</p>
+          <h2 className="text-2xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Frequently Asked Questions</h2>
+          <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">Everything you need to know about projector rentals</p>
         </div>
 
         <div className="space-y-3">
@@ -216,18 +216,18 @@ export const ProjectorLandingPage = () => {
             <div
               key={i}
               onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-              className="glass-panel p-5 rounded-2xl border border-white/10 cursor-pointer transition-colors"
+              className="bg-white dark:bg-[#14211D] p-5 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] cursor-pointer transition-colors shadow-soft-sm"
             >
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-sm text-white">{faq.q}</span>
+                <span className="font-semibold text-sm text-[#17201D] dark:text-[#F8F6F0]">{faq.q}</span>
                 <ChevronDown
-                  className={`w-4 h-4 text-slate-400 transition-transform ${
-                    activeFaq === i ? 'rotate-180 text-brand-primary' : ''
+                  className={`w-4 h-4 text-[#788880] transition-transform ${
+                    activeFaq === i ? 'rotate-180 text-[#176B52]' : ''
                   }`}
                 />
               </div>
               {activeFaq === i && (
-                <p className="text-xs text-slate-300 mt-3 pt-3 border-t border-white/5 leading-relaxed">
+                <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] mt-3 pt-3 border-t border-[#E7E2D6] dark:border-[#1E332B] leading-relaxed">
                   {faq.a}
                 </p>
               )}
@@ -238,16 +238,16 @@ export const ProjectorLandingPage = () => {
 
       {/* 6. FINAL BOTTOM CTA */}
       <section className="max-w-4xl mx-auto px-4 text-center">
-        <div className="glass-panel p-10 rounded-3xl border border-brand-primary/30 space-y-4 shadow-neon-glow">
-          <h3 className="text-2xl sm:text-3xl font-bold font-display text-white">
+        <div className="bg-[#176B52] p-10 rounded-3xl text-white space-y-4 shadow-soft-lg">
+          <h3 className="text-2xl sm:text-3xl font-bold font-display">
             Hosting an Event This Weekend?
           </h3>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-white/85 max-w-md mx-auto leading-relaxed">
             Browse top-rated projectors available in your local neighborhood and send a booking request in under 60 seconds.
           </p>
           <div className="pt-2">
             <Link to="/explore?category=electronics&search=projector">
-              <Button variant="accent" size="lg" className="font-bold">
+              <Button variant="accent" size="lg" className="font-bold bg-[#C96F52] hover:bg-[#b05d42] border-0 text-white shadow-soft-md cursor-pointer">
                 Reserve Your Projector Now
               </Button>
             </Link>

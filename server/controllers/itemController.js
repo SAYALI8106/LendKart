@@ -62,6 +62,11 @@ export const getItems = async (req, res, next) => {
       query.rating = { $gte: Number(minRating) };
     }
 
+    // Owner filter
+    if (req.query.owner) {
+      query.owner = req.query.owner;
+    }
+
     // Sorting
     let sortOption = { createdAt: -1 }; // default newest
     if (sort === 'price_asc') sortOption = { pricePerDay: 1 };

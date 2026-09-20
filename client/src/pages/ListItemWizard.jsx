@@ -161,41 +161,41 @@ export const ListItemWizard = () => {
 
       {/* Page Header */}
       <div className="max-w-2xl">
-        <span className="text-xs font-bold uppercase tracking-wider text-brand-primary font-display">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#176B52] dark:text-[#8EAFA0] font-display">
           Community Lender Wizard
         </span>
-        <h1 className="text-3xl font-bold font-display text-white mt-1">
+        <h1 className="text-3xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0] mt-1">
           List Your Item on LendKart
         </h1>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-[#788880] dark:text-[#7D9B8E] mt-1">
           Complete the steps below. Your live preview card on the right updates instantly.
         </p>
       </div>
 
       {/* Wizard Progress Bar */}
-      <div className="glass-panel p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+      <div className="bg-white dark:bg-[#14211D] p-4 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm flex items-center justify-between">
         {[
           { num: 1, title: 'Basics' },
           { num: 2, title: 'Photos' },
           { num: 3, title: 'Pricing' },
           { num: 4, title: 'Rules & Location' },
           { num: 5, title: 'Review & Publish' }
-        ].map((s, idx) => (
+        ].map((s) => (
           <div key={s.num} className="flex items-center gap-2">
             <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
                 step > s.num
-                  ? 'bg-emerald-500 text-white'
+                  ? 'bg-[#176B52] text-white'
                   : step === s.num
-                  ? 'bg-brand-primary text-white shadow-neon-glow'
-                  : 'bg-white/10 text-slate-400'
+                  ? 'bg-[#176B52] text-white shadow-soft-sm'
+                  : 'bg-[#F4F1EA] dark:bg-[#1E332B] text-[#788880] dark:text-[#7D9B8E]'
               }`}
             >
               {step > s.num ? <Check className="w-3.5 h-3.5" /> : s.num}
             </div>
             <span
               className={`text-xs hidden md:inline font-medium ${
-                step >= s.num ? 'text-white' : 'text-slate-500'
+                step >= s.num ? 'text-[#17201D] dark:text-[#F8F6F0]' : 'text-[#788880] dark:text-[#7D9B8E]'
               }`}
             >
               {s.title}
@@ -205,7 +205,7 @@ export const ListItemWizard = () => {
       </div>
 
       {error && (
-        <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
+        <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{error}</span>
         </div>
@@ -214,13 +214,13 @@ export const ListItemWizard = () => {
       {/* Main Two-Column Layout (Form on Left, Live Preview Card on Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left: Step Form */}
-        <div className="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
+        <div className="lg:col-span-7 bg-white dark:bg-[#14211D] p-6 sm:p-8 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-6">
           {/* Step 1: Basics */}
           {step === 1 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold font-display text-white">Basic Information</h3>
+              <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Basic Information</h3>
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                   Item Title *
                 </label>
                 <input
@@ -228,22 +228,22 @@ export const ListItemWizard = () => {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Sony Alpha A7 IV Mirrorless Camera + 24-70mm Lens"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-sm text-white focus:outline-none focus:border-brand-primary"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-sm text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                     Category *
                   </label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary cursor-pointer"
+                    className="w-full px-3 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52] cursor-pointer"
                   >
                     {categories.map((c) => (
-                      <option key={c._id} value={c._id} className="bg-slate-900">
+                      <option key={c._id} value={c._id} className="bg-white dark:bg-[#14211D]">
                         {c.name}
                       </option>
                     ))}
@@ -251,24 +251,24 @@ export const ListItemWizard = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                     Item Condition *
                   </label>
                   <select
                     value={condition}
                     onChange={(e) => setCondition(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary cursor-pointer"
+                    className="w-full px-3 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52] cursor-pointer"
                   >
-                    <option value="Like New" className="bg-slate-900">Like New</option>
-                    <option value="Excellent" className="bg-slate-900">Excellent</option>
-                    <option value="Good" className="bg-slate-900">Good</option>
-                    <option value="Fair" className="bg-slate-900">Fair</option>
+                    <option value="Like New" className="bg-white dark:bg-[#14211D]">Like New</option>
+                    <option value="Excellent" className="bg-white dark:bg-[#14211D]">Excellent</option>
+                    <option value="Good" className="bg-white dark:bg-[#14211D]">Good</option>
+                    <option value="Fair" className="bg-white dark:bg-[#14211D]">Fair</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                   Detailed Description *
                 </label>
                 <textarea
@@ -276,7 +276,7 @@ export const ListItemWizard = () => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Mention key features, included cables/accessories, best use cases, and condition details..."
-                  className="w-full p-3 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary resize-none"
+                  className="w-full p-3 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52] resize-none"
                 />
               </div>
             </div>
@@ -285,8 +285,8 @@ export const ListItemWizard = () => {
           {/* Step 2: Photos */}
           {step === 2 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold font-display text-white">Item Photos</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Item Photos</h3>
+              <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">
                 High resolution photos get 4x more rental bookings. Add direct image URLs or pick sample demo images.
               </p>
 
@@ -296,7 +296,7 @@ export const ListItemWizard = () => {
                   value={newImageUrl}
                   onChange={(e) => setNewImageUrl(e.target.value)}
                   placeholder="Paste image URL (https://...)"
-                  className="flex-1 px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+                  className="flex-1 px-3 py-2 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
                 />
                 <Button onClick={handleAddImage} variant="secondary" size="sm">
                   <Plus className="w-4 h-4 mr-1" /> Add
@@ -305,7 +305,7 @@ export const ListItemWizard = () => {
 
               {/* Sample Quick Pick Images */}
               <div>
-                <span className="text-[11px] text-slate-400 font-medium block mb-2">
+                <span className="text-[11px] text-[#788880] dark:text-[#7D9B8E] font-medium block mb-2">
                   Or pick high-res sample presets:
                 </span>
                 <div className="flex items-center gap-2 overflow-x-auto pb-1">
@@ -315,7 +315,7 @@ export const ListItemWizard = () => {
                       src={url}
                       alt="Sample"
                       onClick={() => setImages([...images, url])}
-                      className="w-14 h-14 rounded-lg object-cover cursor-pointer border border-white/10 hover:border-brand-primary hover:scale-105 transition-all shrink-0"
+                      className="w-14 h-14 rounded-lg object-cover cursor-pointer border border-[#E7E2D6] dark:border-[#1E332B] hover:border-[#176B52] hover:scale-105 transition-all shrink-0"
                       title="Click to add photo"
                     />
                   ))}
@@ -325,12 +325,12 @@ export const ListItemWizard = () => {
               {/* Added Photos Grid */}
               <div className="grid grid-cols-3 gap-3 pt-2">
                 {images.map((img, i) => (
-                  <div key={i} className="relative aspect-video rounded-xl overflow-hidden group border border-white/10">
+                  <div key={i} className="relative aspect-video rounded-xl overflow-hidden group border border-[#E7E2D6] dark:border-[#1E332B]">
                     <img src={img} alt="Uploaded" className="w-full h-full object-cover" />
                     <button
                       type="button"
                       onClick={() => handleRemoveImage(i)}
-                      className="absolute top-1.5 right-1.5 p-1 rounded-lg bg-rose-500/80 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-1.5 right-1.5 p-1 rounded-lg bg-rose-600 text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -343,11 +343,11 @@ export const ListItemWizard = () => {
           {/* Step 3: Pricing */}
           {step === 3 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold font-display text-white">Rental Pricing</h3>
+              <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Rental Pricing</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                     Daily Rental Price (₹ / day) *
                   </label>
                   <input
@@ -356,15 +356,15 @@ export const ListItemWizard = () => {
                     step="10"
                     value={pricePerDay}
                     onChange={(e) => setPricePerDay(Number(e.target.value))}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-sm text-white focus:outline-none focus:border-brand-primary"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-sm text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
                   />
-                  <span className="text-[11px] text-slate-500 mt-1 block">
+                  <span className="text-[11px] text-[#788880] dark:text-[#7D9B8E] mt-1 block">
                     Recommended: 1% to 2% of original item purchase price.
                   </span>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                     Refundable Security Deposit (₹)
                   </label>
                   <input
@@ -373,20 +373,20 @@ export const ListItemWizard = () => {
                     step="50"
                     value={securityDeposit}
                     onChange={(e) => setSecurityDeposit(Number(e.target.value))}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-sm text-white focus:outline-none focus:border-brand-primary"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-sm text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
                   />
-                  <span className="text-[11px] text-slate-500 mt-1 block">
+                  <span className="text-[11px] text-[#788880] dark:text-[#7D9B8E] mt-1 block">
                     Returned to borrower once returned undamaged.
                   </span>
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white/5 border border-white/5 space-y-1.5 text-xs text-slate-300">
-                <div className="font-semibold text-white">Estimated Monthly Earnings:</div>
-                <div className="text-2xl font-extrabold text-brand-accent font-display">
+              <div className="p-4 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] space-y-1.5 text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
+                <div className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">Estimated Monthly Earnings:</div>
+                <div className="text-2xl font-extrabold text-[#C96F52] font-display">
                   {formatINR(pricePerDay * 8)} / month
                 </div>
-                <div className="text-[11px] text-slate-400">
+                <div className="text-[11px] text-[#788880] dark:text-[#7D9B8E]">
                   Based on an average of 8 rental days per month.
                 </div>
               </div>
@@ -396,10 +396,10 @@ export const ListItemWizard = () => {
           {/* Step 4: Rules & Location */}
           {step === 4 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold font-display text-white">Location & Rules</h3>
+              <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Location & Rules</h3>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                   Item Pickup City / Locality *
                 </label>
                 <input
@@ -407,12 +407,12 @@ export const ListItemWizard = () => {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="e.g. Kothrud, Pune"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-900/60 border border-white/15 text-sm text-white focus:outline-none focus:border-brand-primary"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-sm text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#5C6E66] dark:text-[#A8C8B5] mb-1">
                   Rental Rules
                 </label>
                 <div className="flex gap-2 mb-2">
@@ -421,7 +421,7 @@ export const ListItemWizard = () => {
                     value={newRule}
                     onChange={(e) => setNewRule(e.target.value)}
                     placeholder="e.g. Carry government ID on pickup"
-                    className="flex-1 px-3 py-2 rounded-xl bg-slate-900/60 border border-white/15 text-xs text-white focus:outline-none focus:border-brand-primary"
+                    className="flex-1 px-3 py-2 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#17201D] dark:text-[#F8F6F0] focus:outline-none focus:border-[#176B52]"
                   />
                   <Button onClick={handleAddRule} variant="secondary" size="sm">
                     Add
@@ -432,13 +432,13 @@ export const ListItemWizard = () => {
                   {rentalRules.map((rule, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-2 rounded-lg bg-white/5 text-xs text-slate-300"
+                      className="flex items-center justify-between p-2 rounded-lg bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#5C6E66] dark:text-[#A8C8B5]"
                     >
                       <span>• {rule}</span>
                       <button
                         type="button"
                         onClick={() => handleRemoveRule(idx)}
-                        className="text-rose-400 hover:text-rose-300"
+                        className="text-rose-600 hover:text-rose-700 cursor-pointer"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -452,31 +452,31 @@ export const ListItemWizard = () => {
           {/* Step 5: Review & Publish */}
           {step === 5 && (
             <div className="space-y-4">
-              <h3 className="text-lg font-bold font-display text-white">Review & Publish</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Review & Publish</h3>
+              <p className="text-xs text-[#788880] dark:text-[#7D9B8E]">
                 Double-check your listing details before publishing to the community.
               </p>
 
-              <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2 text-xs text-slate-300">
+              <div className="p-4 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] space-y-2 text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Title:</span>
-                  <span className="font-semibold text-white">{title}</span>
+                  <span>Title:</span>
+                  <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{title}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Location:</span>
-                  <span className="font-semibold text-white">{location}</span>
+                  <span>Location:</span>
+                  <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{location}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Daily Price:</span>
-                  <span className="font-semibold text-brand-accent">{formatINR(pricePerDay)}/day</span>
+                  <span>Daily Price:</span>
+                  <span className="font-semibold text-[#176B52] dark:text-[#8EAFA0]">{formatINR(pricePerDay)}/day</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Security Deposit:</span>
-                  <span className="font-semibold text-brand-secondary">{formatINR(securityDeposit)}</span>
+                  <span>Security Deposit:</span>
+                  <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{formatINR(securityDeposit)}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300">
+              <div className="flex items-center gap-2 p-3 rounded-xl bg-[#176B52]/10 border border-[#176B52]/20 text-xs text-[#176B52] dark:text-[#8EAFA0]">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>
                   Your item will be immediately indexed and discoverable in the explore catalog.
@@ -486,7 +486,7 @@ export const ListItemWizard = () => {
           )}
 
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-between pt-4 border-t border-white/10">
+          <div className="flex items-center justify-between pt-4 border-t border-[#E7E2D6] dark:border-[#1E332B]">
             {step > 1 ? (
               <Button onClick={() => setStep(step - 1)} variant="outline" size="md">
                 <ArrowLeft className="w-4 h-4 mr-1" />
@@ -515,48 +515,48 @@ export const ListItemWizard = () => {
 
         {/* Right: Live Interactive Card Preview */}
         <div className="lg:col-span-5 sticky top-24 space-y-3">
-          <div className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between px-1">
+          <div className="text-xs font-bold uppercase tracking-wider text-[#788880] dark:text-[#7D9B8E] flex items-center justify-between px-1">
             <span>Live Marketplace Card Preview</span>
-            <span className="text-brand-secondary font-medium">Real-time</span>
+            <span className="text-[#176B52] dark:text-[#8EAFA0] font-medium">Real-time</span>
           </div>
 
-          <div className="glass-card rounded-2xl overflow-hidden border border-white/15 shadow-2xl p-0">
-            <div className="relative aspect-[4/3] w-full bg-slate-900">
+          <div className="bg-white dark:bg-[#14211D] rounded-2xl overflow-hidden border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm p-0">
+            <div className="relative aspect-[4/3] w-full bg-[#F2EFE9] dark:bg-[#0E1714]">
               <img
                 src={images[0] || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80'}
                 alt="Preview"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-950/70 backdrop-blur-md text-slate-200 border border-white/10">
+              <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/90 dark:bg-[#0E1714]/85 backdrop-blur-md text-[#17201D] dark:text-[#EAEFE9] border border-[#E7E2D6] dark:border-white/10">
                 {condition}
               </div>
-              <div className="absolute bottom-2.5 left-3 flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-950/70 backdrop-blur-md border border-emerald-500/30 text-[10px] text-emerald-400 font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="absolute bottom-2.5 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 dark:bg-[#0E1714]/90 backdrop-blur-md border border-emerald-500/30 text-[10px] text-emerald-800 dark:text-emerald-300 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Available Today
               </div>
             </div>
 
             <div className="p-4 space-y-2">
-              <h4 className="font-semibold text-sm text-white line-clamp-2">
+              <h4 className="font-semibold text-sm text-[#17201D] dark:text-[#F8F6F0] line-clamp-2">
                 {title || 'Your Item Title Appears Here'}
               </h4>
-              <div className="flex items-center justify-between text-xs text-slate-400">
+              <div className="flex items-center justify-between text-xs text-[#788880] dark:text-[#7D9B8E]">
                 <span className="text-[11px] flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-brand-secondary" />
+                  <MapPin className="w-3 h-3 text-[#176B52] dark:text-[#8EAFA0]" />
                   {location || 'Location'}
                 </span>
-                <span className="text-[11px] text-emerald-400 font-medium">New Listing</span>
+                <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium">New Listing</span>
               </div>
 
-              <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+              <div className="pt-2 border-t border-[#E7E2D6] dark:border-[#1E332B] flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] text-slate-500 uppercase font-bold">Rent for</div>
-                  <div className="text-lg font-bold text-white font-display">
+                  <div className="text-[10px] text-[#788880] dark:text-[#7D9B8E] uppercase font-bold">Rent for</div>
+                  <div className="text-lg font-bold text-[#176B52] dark:text-[#8EAFA0] font-display">
                     {formatINR(pricePerDay)}
-                    <span className="text-xs text-slate-400 font-normal"> /day</span>
+                    <span className="text-xs text-[#788880] dark:text-[#7D9B8E] font-normal"> /day</span>
                   </div>
                 </div>
-                <div className="px-3 py-1 rounded-lg bg-brand-primary text-white text-xs font-semibold">
+                <div className="px-3 py-1 rounded-lg bg-[#176B52]/10 text-[#176B52] dark:text-[#8EAFA0] text-xs font-semibold">
                   Rent
                 </div>
               </div>

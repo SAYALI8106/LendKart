@@ -38,15 +38,15 @@ export const getStatusBadgeClass = (status) => {
   switch (status) {
     case 'Approved':
     case 'Active':
-      return 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+      return 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/40';
     case 'Pending':
-      return 'bg-amber-500/10 text-amber-400 border border-amber-500/30';
+      return 'bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/40';
     case 'Completed':
-      return 'bg-blue-500/10 text-blue-400 border border-blue-500/30';
+      return 'bg-teal-50 text-teal-800 border border-teal-200 dark:bg-teal-950/40 dark:text-teal-300 dark:border-teal-800/40';
     case 'Cancelled':
     case 'Rejected':
-      return 'bg-rose-500/10 text-rose-400 border border-rose-500/30';
+      return 'bg-orange-50 text-orange-800 border border-orange-200 dark:bg-orange-950/40 dark:text-orange-300 dark:border-orange-800/40';
     default:
-      return 'bg-slate-500/10 text-slate-400 border border-slate-500/30';
+      return 'bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-900/50 dark:text-slate-300 dark:border-slate-700/50';
   }
 };

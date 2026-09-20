@@ -146,35 +146,35 @@ export const ItemDetailPage = () => {
       />
 
       {/* Breadcrumb Navigation */}
-      <div className="flex items-center gap-2 text-xs text-slate-400">
-        <Link to="/" className="hover:text-white transition-colors">Home</Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-        <Link to="/explore" className="hover:text-white transition-colors">Explore</Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-        <Link to={`/explore?category=${item.category?.slug}`} className="hover:text-white transition-colors">
+      <div className="flex items-center gap-2 text-xs text-[#788880] dark:text-[#7D9B8E]">
+        <Link to="/" className="hover:text-[#176B52] dark:hover:text-[#F8F6F0] transition-colors">Home</Link>
+        <ChevronRight className="w-3.5 h-3.5 text-[#B8C2BC] dark:text-[#3B5449]" />
+        <Link to="/explore" className="hover:text-[#176B52] dark:hover:text-[#F8F6F0] transition-colors">Explore</Link>
+        <ChevronRight className="w-3.5 h-3.5 text-[#B8C2BC] dark:text-[#3B5449]" />
+        <Link to={`/explore?category=${item.category?.slug}`} className="hover:text-[#176B52] dark:hover:text-[#F8F6F0] transition-colors">
           {item.category?.name || 'Category'}
         </Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
-        <span className="text-slate-200 truncate max-w-xs">{item.title}</span>
+        <ChevronRight className="w-3.5 h-3.5 text-[#B8C2BC] dark:text-[#3B5449]" />
+        <span className="text-[#17201D] dark:text-[#F8F6F0] font-medium truncate max-w-xs">{item.title}</span>
       </div>
 
       {/* Main Product Showcase Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Left: Gallery */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden glass-card border border-white/10 shadow-2xl bg-slate-900">
+        {/* Left: Gallery & Specs */}
+        <div className="lg:col-span-7 space-y-6">
+          <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm">
             <img
               src={item.images?.[activeImageIndex] || item.images?.[0]}
               alt={item.title}
               className="w-full h-full object-cover transition-all duration-300"
             />
             {/* Status Badge */}
-            <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 backdrop-blur-md border border-emerald-500/40 text-xs font-semibold text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-[#0E1714]/90 backdrop-blur-md border border-emerald-500/30 text-xs font-semibold text-emerald-800 dark:text-emerald-300 shadow-soft-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               Verified & Ready
             </div>
             {/* Condition Badge */}
-            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-brand-primary/20 backdrop-blur-md border border-brand-primary/40 text-xs font-semibold text-brand-primary">
+            <div className="absolute top-4 right-4 px-3.5 py-1 rounded-full bg-[#176B52]/15 dark:bg-[#176B52]/30 backdrop-blur-md border border-[#176B52]/30 text-xs font-semibold text-[#176B52] dark:text-[#8EAFA0]">
               {item.condition}
             </div>
           </div>
@@ -186,10 +186,10 @@ export const ItemDetailPage = () => {
                 <button
                   key={idx}
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`w-20 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                  className={`w-20 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${
                     activeImageIndex === idx
-                      ? 'border-brand-primary scale-105 shadow-neon-glow'
-                      : 'border-white/10 opacity-70 hover:opacity-100'
+                      ? 'border-[#176B52] scale-105 shadow-soft-sm'
+                      : 'border-[#E7E2D6] dark:border-[#1E332B] opacity-70 hover:opacity-100'
                   }`}
                 >
                   <img src={img} alt="Thumbnail" className="w-full h-full object-cover" />
@@ -199,23 +199,23 @@ export const ItemDetailPage = () => {
           )}
 
           {/* Description & Specifications */}
-          <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
+          <div className="bg-white dark:bg-[#14211D] p-6 sm:p-8 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-6">
             <div>
-              <h3 className="text-lg font-bold font-display text-white mb-2">About this Item</h3>
-              <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+              <h3 className="text-lg font-bold font-display text-[#17201D] dark:text-[#F8F6F0] mb-2">About this Item</h3>
+              <p className="text-sm text-[#5C6E66] dark:text-[#A8C8B5] leading-relaxed whitespace-pre-line">
                 {item.description}
               </p>
             </div>
 
             {/* Specifications */}
             {item.specifications && item.specifications.length > 0 && (
-              <div className="pt-4 border-t border-white/10">
-                <h4 className="text-sm font-bold font-display text-white mb-3">Item Specifications</h4>
+              <div className="pt-4 border-t border-[#E7E2D6] dark:border-[#1E332B]">
+                <h4 className="text-sm font-bold font-display text-[#17201D] dark:text-[#F8F6F0] mb-3">Item Specifications</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                   {item.specifications.map((spec, i) => (
-                    <div key={i} className="flex justify-between p-2.5 rounded-xl bg-white/5 border border-white/5">
-                      <span className="text-slate-400">{spec.key}</span>
-                      <span className="font-semibold text-white">{spec.value}</span>
+                    <div key={i} className="flex justify-between p-2.5 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B]">
+                      <span className="text-[#788880] dark:text-[#7D9B8E]">{spec.key}</span>
+                      <span className="font-semibold text-[#17201D] dark:text-[#F8F6F0]">{spec.value}</span>
                     </div>
                   ))}
                 </div>
@@ -224,12 +224,12 @@ export const ItemDetailPage = () => {
 
             {/* Rental Rules */}
             {item.rentalRules && item.rentalRules.length > 0 && (
-              <div className="pt-4 border-t border-white/10">
-                <h4 className="text-sm font-bold font-display text-white mb-3">Lender's Rental Rules</h4>
-                <ul className="space-y-1.5 text-xs text-slate-300">
+              <div className="pt-4 border-t border-[#E7E2D6] dark:border-[#1E332B]">
+                <h4 className="text-sm font-bold font-display text-[#17201D] dark:text-[#F8F6F0] mb-3">Lender's Rental Rules</h4>
+                <ul className="space-y-1.5 text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
                   {item.rentalRules.map((rule, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-secondary shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#176B52] dark:text-[#8EAFA0] shrink-0" />
                       <span>{rule}</span>
                     </li>
                   ))}
@@ -241,29 +241,26 @@ export const ItemDetailPage = () => {
 
         {/* Right: Booking Summary & Owner Info */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6 relative overflow-hidden">
-            {/* Ambient subtle glow */}
-            <div className="absolute -top-12 -right-12 w-40 h-40 bg-brand-primary/10 rounded-full blur-2xl pointer-events-none" />
-
+          <div className="bg-white dark:bg-[#14211D] p-6 sm:p-8 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-6 sticky top-24">
             <div>
-              <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 font-semibold text-slate-300">
+              <div className="flex items-center justify-between text-xs text-[#788880] dark:text-[#7D9B8E] mb-2">
+                <span className="px-2.5 py-1 rounded-full bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] font-semibold text-[#176B52] dark:text-[#8EAFA0]">
                   {item.category?.name}
                 </span>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleShare}
-                    className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 transition-colors"
+                    className="p-2 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] hover:bg-[#EAE6DC] text-[#5C6E66] dark:text-[#A8C8B5] transition-colors cursor-pointer"
                     title="Share listing"
                   >
                     <Share2 className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => toggleWishlist(item)}
-                    className={`p-2 rounded-xl transition-colors ${
+                    className={`p-2 rounded-xl transition-colors cursor-pointer ${
                       wishlisted
-                        ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40'
-                        : 'bg-white/5 text-slate-300 hover:text-white'
+                        ? 'bg-[#C96F52]/15 text-[#C96F52] border border-[#C96F52]/30'
+                        : 'bg-[#F8F6F0] dark:bg-[#0E1714] text-[#5C6E66] dark:text-[#A8C8B5] hover:text-[#C96F52]'
                     }`}
                     title={wishlisted ? 'Saved' : 'Save'}
                   >
@@ -273,77 +270,77 @@ export const ItemDetailPage = () => {
               </div>
 
               {copiedLink && (
-                <div className="text-[11px] text-emerald-400 font-medium mb-1">
+                <div className="text-[11px] text-emerald-700 dark:text-emerald-300 font-medium mb-1">
                   ✓ Link copied to clipboard!
                 </div>
               )}
 
-              <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-white leading-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-[#17201D] dark:text-[#F8F6F0] leading-tight">
                 {item.title}
               </h1>
 
               {/* Rating & Location */}
-              <div className="flex items-center gap-4 mt-3 text-xs text-slate-300">
+              <div className="flex items-center gap-4 mt-3 text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
                 <div className="flex items-center gap-1.5">
-                  <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-                  <span className="font-bold text-white">{item.rating?.toFixed(1) || '4.8'}</span>
-                  <span className="text-slate-500">({reviews.length} reviews)</span>
+                  <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                  <span className="font-bold text-[#17201D] dark:text-[#F8F6F0]">{item.rating?.toFixed(1) || '4.8'}</span>
+                  <span className="text-[#788880] dark:text-[#7D9B8E]">({reviews.length} reviews)</span>
                 </div>
                 <span>•</span>
                 <div className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-brand-secondary" />
+                  <MapPin className="w-3.5 h-3.5 text-[#176B52] dark:text-[#8EAFA0]" />
                   <span>{item.location}</span>
                 </div>
               </div>
             </div>
 
             {/* Price Box */}
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-baseline justify-between">
+            <div className="p-4 rounded-2xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] flex items-baseline justify-between">
               <div>
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                <div className="text-[10px] uppercase tracking-wider text-[#788880] dark:text-[#7D9B8E] font-bold">
                   Daily Rental Rate
                 </div>
                 <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-3xl font-extrabold font-display text-white">
+                  <span className="text-3xl font-extrabold font-display text-[#176B52] dark:text-[#8EAFA0]">
                     {formatINR(item.pricePerDay)}
                   </span>
-                  <span className="text-xs text-slate-400">/ day</span>
+                  <span className="text-xs text-[#788880] dark:text-[#7D9B8E]">/ day</span>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                <div className="text-[10px] uppercase tracking-wider text-[#788880] dark:text-[#7D9B8E] font-bold">
                   Security Deposit
                 </div>
-                <div className="text-sm font-semibold text-brand-secondary mt-0.5">
+                <div className="text-sm font-semibold text-[#17201D] dark:text-[#F8F6F0] mt-0.5">
                   {formatINR(item.securityDeposit)}
                 </div>
-                <div className="text-[10px] text-emerald-400">100% Refundable</div>
+                <div className="text-[10px] text-emerald-700 dark:text-emerald-400 font-medium">100% Refundable</div>
               </div>
             </div>
 
             {/* Owner Profile Card */}
             {item.owner && (
-              <div className="p-4 rounded-2xl glass-panel border border-white/10 flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
                     src={item.owner.avatar}
                     alt={item.owner.name}
-                    className="w-12 h-12 rounded-2xl object-cover border border-white/20"
+                    className="w-12 h-12 rounded-2xl object-cover border border-[#E7E2D6] dark:border-[#1E332B]"
                   />
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h4 className="font-bold text-sm text-white">{item.owner.name}</h4>
+                      <h4 className="font-bold text-sm text-[#17201D] dark:text-[#F8F6F0]">{item.owner.name}</h4>
                       {item.owner.isVerified && (
-                        <ShieldCheck className="w-4 h-4 text-emerald-400" title="Verified Super Lender" />
+                        <ShieldCheck className="w-4 h-4 text-[#176B52] dark:text-[#8EAFA0]" title="Verified Super Lender" />
                       )}
                     </div>
-                    <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                      <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                    <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] flex items-center gap-1 mt-0.5">
+                      <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
                       <span>{item.owner.rating || 4.9} Lender Rating</span>
                     </p>
                   </div>
                 </div>
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
+                <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#176B52]/10 text-[#176B52] dark:text-[#8EAFA0] border border-[#176B52]/20">
                   SuperLender
                 </span>
               </div>
@@ -361,11 +358,11 @@ export const ItemDetailPage = () => {
                 }}
                 variant="accent"
                 size="lg"
-                className="w-full text-base font-bold shadow-neon-glow"
+                className="w-full text-base font-bold shadow-soft-sm cursor-pointer"
               >
                 <span>Request This Rental</span>
               </Button>
-              <div className="text-center text-[11px] text-slate-400">
+              <div className="text-center text-[11px] text-[#788880] dark:text-[#7D9B8E]">
                 You won't be charged until the lender accepts your dates.
               </div>
             </div>
@@ -380,27 +377,26 @@ export const ItemDetailPage = () => {
         item={item}
         bookedRanges={bookedRanges}
         onSuccess={() => {
-          // Refresh booked ranges
           rentalService.getBookedDates(id).then(setBookedRanges);
         }}
       />
 
       {/* Reviews Section */}
-      <div className="pt-8 border-t border-white/10 space-y-6">
+      <div className="pt-8 border-t border-[#E7E2D6] dark:border-[#1E332B] space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-xl font-bold font-display text-white">Community Reviews</h3>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <h3 className="text-xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Community Reviews</h3>
+            <p className="text-xs text-[#788880] dark:text-[#7D9B8E] mt-0.5">
               Verified feedback from members who rented this item
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-white font-display">
+            <span className="text-2xl font-bold text-[#17201D] dark:text-[#F8F6F0] font-display">
               {item.rating?.toFixed(1) || '4.8'}
             </span>
             <div>
               <RatingStars rating={item.rating || 4.8} size="sm" />
-              <span className="text-[11px] text-slate-400">{reviews.length} reviews</span>
+              <span className="text-[11px] text-[#788880] dark:text-[#7D9B8E]">{reviews.length} reviews</span>
             </div>
           </div>
         </div>
@@ -409,10 +405,10 @@ export const ItemDetailPage = () => {
         {isAuthenticated && (
           <form
             onSubmit={handleReviewSubmit}
-            className="p-5 rounded-2xl glass-panel border border-white/10 space-y-3"
+            className="p-5 rounded-2xl bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] space-y-3 shadow-soft-sm"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#5C6E66] dark:text-[#A8C8B5]">
                 Leave a Verified Review
               </span>
               <RatingStars
@@ -427,10 +423,10 @@ export const ItemDetailPage = () => {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="How was the equipment condition and lender communication?"
-              className="w-full p-3 rounded-xl bg-slate-900/60 border border-white/15 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-primary resize-none"
+              className="w-full p-3 rounded-xl bg-[#F8F6F0] dark:bg-[#0E1714] border border-[#E7E2D6] dark:border-[#1E332B] text-xs sm:text-sm text-[#17201D] dark:text-[#F8F6F0] placeholder-[#788880] dark:placeholder-[#7D9B8E] focus:outline-none focus:border-[#176B52] resize-none"
             />
             {reviewError && (
-              <div className="text-xs text-rose-400">{reviewError}</div>
+              <div className="text-xs text-rose-700 dark:text-rose-300">{reviewError}</div>
             )}
             <div className="flex justify-end">
               <Button
@@ -448,12 +444,12 @@ export const ItemDetailPage = () => {
         {/* Reviews List */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {reviews.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-400 col-span-2 glass-card rounded-2xl">
+            <div className="p-8 text-center text-xs text-[#788880] dark:text-[#7D9B8E] col-span-2 bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] rounded-2xl">
               No reviews written yet. Be the first to rent and review this item!
             </div>
           ) : (
             reviews.map((rev) => (
-              <div key={rev._id} className="p-5 rounded-2xl glass-card border border-white/5 space-y-3">
+              <div key={rev._id} className="p-5 rounded-2xl bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] space-y-3 shadow-soft-sm">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <img
@@ -462,13 +458,13 @@ export const ItemDetailPage = () => {
                       className="w-8 h-8 rounded-full object-cover"
                     />
                     <div>
-                      <div className="text-xs font-bold text-white">{rev.reviewer?.name}</div>
-                      <div className="text-[10px] text-slate-500">{formatDate(rev.createdAt)}</div>
+                      <div className="text-xs font-bold text-[#17201D] dark:text-[#F8F6F0]">{rev.reviewer?.name}</div>
+                      <div className="text-[10px] text-[#788880] dark:text-[#7D9B8E]">{formatDate(rev.createdAt)}</div>
                     </div>
                   </div>
                   <RatingStars rating={rev.rating} size="xs" />
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">{rev.comment}</p>
+                <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] leading-relaxed">{rev.comment}</p>
               </div>
             ))
           )}
@@ -477,10 +473,10 @@ export const ItemDetailPage = () => {
 
       {/* Similar Items Carousel */}
       {similarItems.length > 0 && (
-        <div className="pt-10 border-t border-white/10 space-y-6">
+        <div className="pt-10 border-t border-[#E7E2D6] dark:border-[#1E332B] space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold font-display text-white">Similar Gear in {item.category?.name}</h3>
-            <Link to={`/explore?category=${item.category?.slug}`} className="text-xs font-semibold text-brand-primary hover:text-brand-secondary">
+            <h3 className="text-xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">Similar Gear in {item.category?.name}</h3>
+            <Link to={`/explore?category=${item.category?.slug}`} className="text-xs font-semibold text-[#176B52] dark:text-[#8EAFA0] hover:underline">
               View All →
             </Link>
           </div>
