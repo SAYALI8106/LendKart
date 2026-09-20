@@ -153,37 +153,44 @@ const InteractiveScene = ({ mouse }) => {
   useFrame(() => {
     if (groupRef.current) {
       // Gentle, smooth interpolation towards mouse position
-      groupRef.current.rotation.y += (mouse.current[0] * 0.25 - groupRef.current.rotation.y) * 0.04;
-      groupRef.current.rotation.x += (-mouse.current[1] * 0.2 - groupRef.current.rotation.x) * 0.04;
+      groupRef.current.rotation.y += (mouse.current[0] * 0.16 - groupRef.current.rotation.y) * 0.04;
+      groupRef.current.rotation.x += (-mouse.current[1] * 0.12 - groupRef.current.rotation.x) * 0.04;
     }
   });
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} scale={0.76}>
       {/* Center 4K Projector */}
-      <Float speed={1.8} rotationIntensity={0.3} floatIntensity={0.6}>
-        <ProjectorModel position={[0, 0.1, 0]} rotation={[0.15, -0.3, 0]} />
+      <Float speed={1.6} rotationIntensity={0.2} floatIntensity={0.35}>
+        <ProjectorModel position={[0, 0, 0]} rotation={[0.1, -0.22, 0]} />
       </Float>
 
       {/* Floating Camera Top Left */}
-      <Float speed={2.0} rotationIntensity={0.4} floatIntensity={0.8}>
-        <CameraModel position={[-2.3, 1.3, -0.5]} />
+      <Float speed={1.8} rotationIntensity={0.25} floatIntensity={0.4}>
+        <CameraModel position={[-1.6, 1.1, -0.2]} />
       </Float>
 
       {/* Floating Gaming Controller Right */}
-      <Float speed={1.9} rotationIntensity={0.4} floatIntensity={0.7}>
-        <ControllerModel position={[2.3, 0.7, -0.3]} />
+      <Float speed={1.7} rotationIntensity={0.25} floatIntensity={0.4}>
+        <ControllerModel position={[1.65, 0.55, -0.2]} />
       </Float>
 
       {/* Floating Studio Headphones Bottom Left */}
-      <Float speed={1.6} rotationIntensity={0.25} floatIntensity={0.5}>
-        <HeadphonesModel position={[-2.1, -1.1, 0.2]} />
+      <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.35}>
+        <HeadphonesModel position={[-1.5, -0.95, 0.1]} />
       </Float>
 
-      {/* Community Shared Token (Sage Orb) */}
-      <Float speed={2.2} floatIntensity={0.8}>
-        <Sphere args={[0.14, 16, 16]} position={[2.0, -1.2, 0.5]}>
-          <meshStandardMaterial color="#A8C8B5" roughness={0.2} metalness={0.1} />
+      {/* Community Shared Token (Sage Orb) Bottom Right */}
+      <Float speed={1.9} floatIntensity={0.4}>
+        <Sphere args={[0.15, 16, 16]} position={[1.5, -0.95, 0.3]}>
+          <meshStandardMaterial color="#8EAFA0" roughness={0.3} metalness={0.2} />
+        </Sphere>
+      </Float>
+
+      {/* Subtle Terracotta Accent Pearl */}
+      <Float speed={1.6} floatIntensity={0.35}>
+        <Sphere args={[0.08, 16, 16]} position={[-0.15, 1.25, -0.3]}>
+          <meshStandardMaterial color="#C96F52" roughness={0.4} metalness={0.2} />
         </Sphere>
       </Float>
     </group>
@@ -221,14 +228,14 @@ export const HeroScene = () => {
   }
 
   return (
-    <div className="relative w-full h-[460px] lg:h-[540px] select-none">
+    <div className="relative w-full h-[400px] sm:h-[460px] lg:h-[500px] select-none flex items-center justify-center">
       <Suspense fallback={<FallbackHero2D />}>
         <Canvas
-          camera={{ position: [0, 0, 5.5], fov: 45 }}
+          camera={{ position: [0, 0, 6.8], fov: 42 }}
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
         >
-          <ambientLight intensity={0.9} />
+          <ambientLight intensity={0.95} />
           <directionalLight position={[5, 7, 5]} intensity={1.4} color="#FFFBF0" />
           <pointLight position={[-4, -3, 2]} intensity={1.2} color="#176B52" />
           <pointLight position={[4, 2, 3]} intensity={1.0} color="#C96F52" />
