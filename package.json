@@ -1,0 +1,16 @@
+{
+  "name": "lendkart-platform",
+  "version": "1.0.0",
+  "description": "LendKart - Premium 3D Community Rental Marketplace",
+  "main": "server/server.js",
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "seed": "cd server && node seed/seeder.js",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
