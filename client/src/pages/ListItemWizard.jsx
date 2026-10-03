@@ -153,7 +153,7 @@ export const ListItemWizard = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="listing-wizard max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       <SEO
         title="List Your Item for Rent"
         description="Share your camera, tools, projector or camping equipment on LendKart and earn passive rental income."
@@ -173,7 +173,7 @@ export const ListItemWizard = () => {
       </div>
 
       {/* Wizard Progress Bar */}
-      <div className="bg-white dark:bg-[#14211D] p-4 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm flex items-center justify-between">
+      <div className="wizard-progress bg-white dark:bg-[#14211D] p-3 sm:p-4 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm flex items-center justify-between">
         {[
           { num: 1, title: 'Basics' },
           { num: 2, title: 'Photos' },
@@ -194,7 +194,7 @@ export const ListItemWizard = () => {
               {step > s.num ? <Check className="w-3.5 h-3.5" /> : s.num}
             </div>
             <span
-              className={`text-xs hidden md:inline font-medium ${
+              className={`wizard-progress-label text-xs hidden md:inline font-medium ${
                 step >= s.num ? 'text-[#17201D] dark:text-[#F8F6F0]' : 'text-[#788880] dark:text-[#7D9B8E]'
               }`}
             >
@@ -214,7 +214,7 @@ export const ListItemWizard = () => {
       {/* Main Two-Column Layout (Form on Left, Live Preview Card on Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left: Step Form */}
-        <div className="lg:col-span-7 bg-white dark:bg-[#14211D] p-6 sm:p-8 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-6">
+        <div className="listing-form-panel lg:col-span-7 bg-white dark:bg-[#14211D] p-6 sm:p-8 rounded-3xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm space-y-6">
           {/* Step 1: Basics */}
           {step === 1 && (
             <div className="space-y-4">
@@ -514,13 +514,13 @@ export const ListItemWizard = () => {
         </div>
 
         {/* Right: Live Interactive Card Preview */}
-        <div className="lg:col-span-5 sticky top-24 space-y-3">
+        <div className="listing-preview-panel lg:col-span-5 sticky top-24 space-y-3">
           <div className="text-xs font-bold uppercase tracking-wider text-[#788880] dark:text-[#7D9B8E] flex items-center justify-between px-1">
             <span>Live Marketplace Card Preview</span>
             <span className="text-[#176B52] dark:text-[#8EAFA0] font-medium">Real-time</span>
           </div>
 
-          <div className="bg-white dark:bg-[#14211D] rounded-2xl overflow-hidden border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm p-0">
+          <div className="listing-preview-card bg-white dark:bg-[#14211D] rounded-2xl overflow-hidden border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-md p-0">
             <div className="relative aspect-[4/3] w-full bg-[#F2EFE9] dark:bg-[#0E1714]">
               <img
                 src={images[0] || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80'}

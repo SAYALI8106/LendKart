@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 export const TiltCard = ({ children, className = '', maxTilt = 10, scale = 1.02 }) => {
   const cardRef = useRef(null);
-  const [style, setStyle] = useState({});
+  const frameRef = useRef(null);
+  const targetRef = useRef({ rotateX: 0, rotateY: 0 });
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -16,17 +17,22 @@ export const TiltCard = ({ children, className = '', maxTilt = 10, scale = 1.02 
     const rotateX = ((y - centerY) / centerY) * -maxTilt;
     const rotateY = ((x - centerX) / centerX) * maxTilt;
 
-    setStyle({
-      transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`,
-      transition: 'transform 0.1s ease-out'
-    });
+    targetRef.current = { rotateX, rotateY };
+    if (frameRef.current) return;
+    const animate = () => {
+      if (!cardRef.current) return;
+      const { rotateX: nextX, rotateY: nextY } = targetRef.current;
+      cardRef.current.style.transform = `perspective(1000px) rotateX(${nextX.toFixed(2)}deg) rotateY(${nextY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`;
+      frameRef.current = null;
+    };
+    frameRef.current = requestAnimationFrame(animate);
   };
 
   const handleMouseLeave = () => {
-    setStyle({
-      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
-      transition: 'transform 0.4s ease-out'
-    });
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    frameRef.current = null;
+    targetRef.current = { rotateX: 0, rotateY: 0 };
+    cardRef.current?.style.setProperty('transform', 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)');
   };
 
   return (
@@ -34,8 +40,7 @@ export const TiltCard = ({ children, className = '', maxTilt = 10, scale = 1.02 
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={style}
-      className={`will-change-transform ${className}`}
+      className={`tilt-card will-change-transform ${className}`}
     >
       {children}
     </div>

@@ -11,10 +11,11 @@ export const Button = ({
   onClick,
   type = 'button',
   icon: Icon,
+  as: Component = 'button',
   ...props
 }) => {
   const baseStyles =
-    'inline-flex items-center justify-center font-medium transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98]';
+    'interactive-control inline-flex items-center justify-center font-medium transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none active:scale-[0.98]';
 
   const variants = {
     primary:
@@ -38,10 +39,10 @@ export const Button = ({
   };
 
   return (
-    <button
-      type={type}
+    <Component
+      type={Component === 'button' ? type : undefined}
       onClick={onClick}
-      disabled={disabled || isLoading}
+      disabled={Component === 'button' ? disabled || isLoading : undefined}
       className={`${baseStyles} ${variants[variant] || variants.primary} ${sizes[size]} ${className}`}
       {...props}
     >
@@ -51,7 +52,7 @@ export const Button = ({
         <Icon className="w-4 h-4 text-current" />
       ) : null}
       {children}
-    </button>
+    </Component>
   );
 };
 

@@ -12,8 +12,7 @@ import {
   LogOut,
   LayoutDashboard,
   Sparkles,
-  Layers,
-  Repeat
+  Layers
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -53,43 +52,45 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+      className={`premium-header sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#FFFDF9]/95 dark:bg-[#14211D]/95 backdrop-blur-md py-3 shadow-soft-sm border-b border-[#E7E2D6] dark:border-white/10'
+          ? 'bg-[#FFFDF9]/85 dark:bg-[#0A1310]/85 backdrop-blur-xl py-3 shadow-soft-md border-b border-[#E7E2D6]/80 dark:border-white/10'
           : 'bg-transparent py-4 border-b border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="premium-header-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Left: Brand Logo & Editorial Wordmark */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-xl bg-brand-primary flex items-center justify-center text-white shadow-soft-sm group-hover:scale-105 transition-transform duration-200">
-            <Repeat className="w-5 h-5 text-emerald-100" />
+        <Link to="/" className="brand-lockup flex items-center gap-3 group cursor-pointer">
+          <div className="brand-mark relative w-11 h-11 rounded-[1.1rem] flex items-center justify-center text-white shadow-forest-glow group-hover:scale-105 transition-transform duration-300">
+            <span className="brand-mark-ring absolute inset-1 rounded-[0.8rem] border border-white/30" />
+            <img src="/favicon.svg" alt="" className="relative w-7 h-7 object-contain" />
+            <span className="brand-mark-dot absolute -right-1 -top-1 w-2.5 h-2.5 rounded-full bg-[#D4A373] border-2 border-[#FFFDF9] dark:border-[#0A1310]" />
           </div>
           <div className="flex flex-col">
-            <span className="text-xl font-bold font-display tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
+            <span className="text-[1.35rem] leading-none font-bold font-display tracking-[-0.04em] text-slate-900 dark:text-white flex items-center gap-1.5">
               LendKart
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent inline-block" />
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent inline-block shadow-sm" />
             </span>
-            <span className="text-[10px] tracking-wider uppercase font-semibold text-slate-500 dark:text-slate-400 -mt-1 hidden sm:block">
-              Don't Buy It. Lend It.
+            <span className="text-[9px] tracking-[0.16em] uppercase font-extrabold text-brand-primary dark:text-brand-secondary mt-1 hidden sm:block">
+              Shared gear. Better living.
             </span>
           </div>
         </Link>
 
         {/* Center: Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#F1ECE1]/60 dark:bg-white/5 p-1 rounded-full border border-[#E7E2D6]/80 dark:border-white/10">
+        <nav className="premium-nav hidden md:flex items-center gap-1.5 bg-[#F1ECE1]/80 dark:bg-white/5 p-1.5 rounded-full border border-[#E7E2D6] dark:border-white/10 backdrop-blur-md shadow-inner">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             return (
               <Link
                 key={link.label}
                 to={link.path}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
+                className={`premium-nav-link px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-white dark:bg-brand-primary text-brand-primary dark:text-white shadow-soft-sm'
+                    ? 'bg-brand-primary text-white shadow-soft-sm scale-[1.02]'
                     : link.highlight
-                    ? 'text-brand-accent hover:text-brand-accentHover font-semibold'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-brand-primary dark:hover:text-white'
+                    ? 'text-brand-accent hover:text-brand-accentHover font-extrabold hover:bg-brand-clayLight/60 dark:hover:bg-white/5'
+                    : 'text-slate-700 dark:text-slate-200 hover:text-brand-primary dark:hover:text-white hover:bg-white/60 dark:hover:bg-white/10'
                 }`}
               >
                 {link.label}
@@ -103,45 +104,46 @@ export const Navbar = () => {
           {/* List an Item CTA */}
           <Link
             to="/list-item"
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-primary hover:bg-brand-primaryHover text-white text-xs font-semibold shadow-soft-sm hover:shadow-forest-glow transition-all duration-200"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4.5 py-2 rounded-xl bg-gradient-to-r from-brand-primary to-[#125440] hover:from-[#125440] hover:to-brand-primary text-white text-xs font-bold shadow-soft-sm hover:shadow-forest-glow hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 text-emerald-200" />
             <span>List an Item</span>
           </Link>
 
           {/* Wishlist Icon */}
           <Link
             to="/wishlist"
-            className="relative p-2 rounded-xl border border-[#E7E2D6] dark:border-white/10 bg-white/70 dark:bg-white/5 text-slate-700 dark:text-slate-200 hover:text-brand-primary dark:hover:text-white hover:border-brand-primary/40 transition-colors"
+            className="relative p-2.5 rounded-xl border border-[#E7E2D6] dark:border-white/10 bg-white/80 dark:bg-white/5 text-slate-700 dark:text-slate-200 hover:text-brand-accent dark:hover:text-brand-accent hover:border-brand-accent/50 transition-all shadow-xs hover:scale-105"
             title="My Wishlist"
           >
-            <Heart className="w-4 h-4" />
+            <Heart className={`w-4 h-4 ${wishlistCount > 0 ? 'fill-brand-accent text-brand-accent' : ''}`} />
             {wishlistCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-brand-accent text-white text-[9px] font-bold flex items-center justify-center">
+              <span className="absolute -top-1.5 -right-1.5 min-w-4 h-4 px-1 rounded-full bg-brand-accent text-white text-[9px] font-bold flex items-center justify-center shadow-sm animate-bounce">
                 {wishlistCount}
               </span>
             )}
           </Link>
 
-          {/* Notifications Dropdown */}
-          <NotificationDropdown />
+          <div className="hidden md:flex items-center gap-2 sm:gap-3">
+            {/* Notifications Dropdown */}
+            <NotificationDropdown />
 
-          {/* Dark / Light Mode Switch */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-xl border border-[#E7E2D6] dark:border-white/10 bg-white/70 dark:bg-white/5 text-slate-700 dark:text-slate-200 hover:text-brand-primary dark:hover:text-white transition-colors"
-            title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-amber-300" />
-            ) : (
-              <Moon className="w-4 h-4 text-slate-600" />
-            )}
-          </button>
+            {/* Dark / Light Mode Switch */}
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 rounded-xl border border-[#E7E2D6] dark:border-white/10 bg-white/80 dark:bg-white/5 text-slate-700 dark:text-slate-200 hover:text-brand-primary dark:hover:text-amber-300 transition-all shadow-xs hover:scale-105 cursor-pointer"
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-300 rotate-0 hover:rotate-90 transition-transform duration-500" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700 rotate-0 hover:-rotate-12 transition-transform duration-300" />
+              )}
+            </button>
 
-          {/* User Profile or Login */}
-          {isAuthenticated ? (
-            <div className="relative">
+            {/* User Profile or Login */}
+            {isAuthenticated ? (
+              <div className="relative">
               <button
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className="flex items-center gap-2 p-1 rounded-xl border border-[#E7E2D6] dark:border-white/10 bg-white/70 dark:bg-white/5 hover:border-brand-primary/50 transition-colors"
@@ -207,15 +209,16 @@ export const Navbar = () => {
                   </button>
                 </div>
               )}
-            </div>
-          ) : (
-            <Link
-              to="/login"
-              className="px-4 py-2 rounded-xl border border-[#E7E2D6] dark:border-white/15 bg-white/80 dark:bg-white/5 text-xs font-semibold text-slate-800 dark:text-white hover:border-brand-primary transition-all shadow-soft-sm"
-            >
-              Sign In
-            </Link>
-          )}
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="px-4 py-2 rounded-xl border border-[#E7E2D6] dark:border-white/15 bg-white/80 dark:bg-white/5 text-xs font-semibold text-slate-800 dark:text-white hover:border-brand-primary transition-all shadow-soft-sm"
+              >
+                Sign In
+              </Link>
+            )}
+          </div>
 
           {/* Mobile Menu Trigger */}
           <button
@@ -239,6 +242,34 @@ export const Navbar = () => {
               {link.label}
             </Link>
           ))}
+          <div className="flex items-center justify-between gap-3 pt-2 border-t border-[#E7E2D6] dark:border-white/10">
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Preferences</span>
+            <button
+              onClick={toggleTheme}
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-300" /> : <Moon className="w-4 h-4" />}
+              {theme === 'dark' ? 'Light mode' : 'Dark mode'}
+            </button>
+          </div>
+          <div className="flex items-center justify-between gap-3 px-3 py-2 rounded-xl bg-black/[0.03] dark:bg-white/[0.03]">
+            <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">Notifications</span>
+            <NotificationDropdown />
+          </div>
+          {isAuthenticated ? (
+            <Link to="/dashboard" className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5">
+              My Dashboard
+            </Link>
+          ) : (
+            <Link to="/login" className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5">
+              Sign In
+            </Link>
+          )}
+          {isAuthenticated && (
+            <Link to="/profile" className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-800 dark:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5">
+              Profile Settings
+            </Link>
+          )}
           <Link
             to="/list-item"
             className="block w-full py-2.5 text-center rounded-xl bg-brand-primary text-white text-xs font-bold"

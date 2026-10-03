@@ -7,10 +7,11 @@ export const EmptyState = ({
   title = 'No items found',
   description = 'Try adjusting your search filters or check back later.',
   actionLabel,
-  onAction
+  onAction,
+  className = ''
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center p-12 bg-white dark:bg-[#14211D] rounded-3xl border border-[#E7E2D6] dark:border-white/10 my-6 shadow-soft-sm">
+    <div className={`flex flex-col items-center justify-center text-center p-8 sm:p-12 bg-white/80 dark:bg-[#14211D]/90 rounded-3xl border border-[#E7E2D6] dark:border-white/10 my-6 shadow-soft-sm ${className}`}>
       <div className="w-14 h-14 rounded-2xl bg-brand-primaryLight dark:bg-emerald-950/40 border border-brand-primary/20 flex items-center justify-center text-brand-primary dark:text-emerald-300 mb-4">
         <Icon className="w-7 h-7" />
       </div>

@@ -105,13 +105,13 @@ export const ExplorePage = () => {
       />
 
       {/* Header and Mobile Filter Trigger */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#E7E2D6] dark:border-[#1E332B]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[#E6E1D5] dark:border-white/10">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0]">
+          <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-[#F8F6F0]">
             Explore Community Gear
           </h1>
-          <p className="text-xs text-[#788880] dark:text-[#7D9B8E] mt-1">
-            Showing {totalCount} verified items available for rent
+          <p className="text-xs font-semibold text-[#52635B] dark:text-[#7D9B8E] mt-1">
+            Showing <span className="text-brand-primary dark:text-brand-secondary font-extrabold">{totalCount}</span> verified items available for instant rental
           </p>
         </div>
 
@@ -119,25 +119,25 @@ export const ExplorePage = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileFilterOpen(true)}
-            className="lg:hidden flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-[#14211D] text-xs font-semibold text-[#17201D] dark:text-[#F8F6F0] border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm cursor-pointer"
+            className="lg:hidden flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#111E1A] text-xs font-bold text-slate-900 dark:text-[#F8F6F0] border border-[#E6E1D5] dark:border-white/10 shadow-soft-sm cursor-pointer hover:border-brand-primary/50"
           >
-            <SlidersHorizontal className="w-4 h-4 text-[#176B52] dark:text-[#8EAFA0]" />
+            <SlidersHorizontal className="w-4 h-4 text-brand-primary dark:text-brand-secondary" />
             <span>Filters</span>
           </button>
 
           {/* Sorting Dropdown */}
-          <div className="flex items-center gap-2 bg-white dark:bg-[#14211D] px-3 py-2 rounded-xl border border-[#E7E2D6] dark:border-[#1E332B] text-xs text-[#5C6E66] dark:text-[#A8C8B5] shadow-soft-sm">
-            <ArrowUpDown className="w-3.5 h-3.5 text-[#176B52] dark:text-[#8EAFA0]" />
+          <div className="flex items-center gap-2 bg-white/90 dark:bg-[#111E1A]/90 px-3.5 py-2.5 rounded-2xl border border-[#E6E1D5] dark:border-white/10 text-xs font-bold text-slate-700 dark:text-[#A8C8B5] shadow-soft-sm backdrop-blur-md">
+            <ArrowUpDown className="w-3.5 h-3.5 text-brand-primary dark:text-brand-secondary" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-transparent text-xs text-[#17201D] dark:text-[#F8F6F0] focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-bold text-slate-900 dark:text-[#F8F6F0] focus:outline-none cursor-pointer"
             >
-              <option value="recommended" className="bg-white dark:bg-[#14211D]">Recommended</option>
-              <option value="price_asc" className="bg-white dark:bg-[#14211D]">Price: Low to High</option>
-              <option value="price_desc" className="bg-white dark:bg-[#14211D]">Price: High to Low</option>
-              <option value="rating" className="bg-white dark:bg-[#14211D]">Highest Rated</option>
-              <option value="newest" className="bg-white dark:bg-[#14211D]">Newest First</option>
+              <option value="recommended" className="bg-white dark:bg-[#111E1A]">Recommended</option>
+              <option value="price_asc" className="bg-white dark:bg-[#111E1A]">Price: Low to High</option>
+              <option value="price_desc" className="bg-white dark:bg-[#111E1A]">Price: High to Low</option>
+              <option value="rating" className="bg-white dark:bg-[#111E1A]">Highest Rated</option>
+              <option value="newest" className="bg-white dark:bg-[#111E1A]">Newest First</option>
             </select>
           </div>
         </div>
@@ -203,7 +203,7 @@ export const ExplorePage = () => {
         <div className="lg:col-span-3 space-y-6">
           {/* Quick Search Field */}
           <div className="relative">
-            <Search className="w-4 h-4 text-[#788880] dark:text-[#7D9B8E] absolute left-3.5 top-3.5" />
+            <Search className="w-4.5 h-4.5 text-brand-primary dark:text-brand-secondary absolute left-4 top-3.5" />
             <input
               type="text"
               value={searchQuery}
@@ -211,8 +211,8 @@ export const ExplorePage = () => {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              placeholder="Search by keywords, brand, or model..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] text-xs sm:text-sm text-[#17201D] dark:text-[#F8F6F0] placeholder-[#788880] dark:placeholder-[#7D9B8E] shadow-soft-sm focus:outline-none focus:border-[#176B52]"
+              placeholder="Search by keywords, brand, or model (e.g. Sony, Epson, Decathlon)..."
+              className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white/90 dark:bg-[#111E1A]/90 border border-[#E6E1D5] dark:border-white/10 text-xs sm:text-sm font-medium text-slate-900 dark:text-[#F8F6F0] placeholder-slate-400 dark:placeholder-[#7D9B8E] shadow-soft-sm focus:outline-none focus:border-brand-primary backdrop-blur-md"
             />
           </div>
 
@@ -250,10 +250,10 @@ export const ExplorePage = () => {
                       setCurrentPage(pageNum);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className={`w-9 h-9 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                    className={`w-10 h-10 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       currentPage === pageNum
-                        ? 'bg-[#176B52] text-white shadow-soft-sm'
-                        : 'bg-white dark:bg-[#14211D] border border-[#E7E2D6] dark:border-[#1E332B] text-[#5C6E66] dark:text-[#A8C8B5] hover:border-[#176B52]/40'
+                        ? 'bg-brand-primary text-white shadow-forest-glow scale-105'
+                        : 'bg-white dark:bg-[#111E1A] border border-[#E6E1D5] dark:border-white/10 text-slate-700 dark:text-[#A8C8B5] hover:border-brand-primary/40 hover:scale-105'
                     }`}
                   >
                     {pageNum}

@@ -21,6 +21,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { initGA } from './services/analytics';
+import { AmbientObjectField } from './components/3d/HeroScene';
 
 // Auto-scroll to top on navigation
 const ScrollToTop = () => {
@@ -42,7 +43,8 @@ export function App() {
         <WishlistProvider>
           <Router>
             <ScrollToTop />
-            <div className="flex flex-col min-h-screen">
+            <div className="site-shell flex flex-col min-h-screen">
+              <AmbientObjectField />
               <Navbar />
               <main className="flex-1">
                 <Routes>

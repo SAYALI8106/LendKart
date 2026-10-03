@@ -197,6 +197,91 @@ const InteractiveScene = ({ mouse }) => {
   );
 };
 
+const AmbientObjectScene = () => {
+  return (
+    <group scale={0.5}>
+      <Float speed={1.2} rotationIntensity={0.18} floatIntensity={0.3}>
+        <CameraModel position={[-5.2, 2.9, -0.7]} />
+      </Float>
+      <Float speed={0.91} rotationIntensity={0.16} floatIntensity={0.25}>
+        <ProjectorModel position={[4.8, 1.7, -1.4]} rotation={[0.08, 0.3, 0]} />
+      </Float>
+      <Float speed={1.31} rotationIntensity={0.2} floatIntensity={0.3}>
+        <ControllerModel position={[-4.7, -2.6, -0.4]} />
+      </Float>
+      <Float speed={1.18} rotationIntensity={0.16} floatIntensity={0.28}>
+        <HeadphonesModel position={[4.3, -2.9, -1.1]} />
+      </Float>
+      <Float speed={1.42} floatIntensity={0.24}>
+        <Sphere args={[0.14, 16, 16]} position={[-0.7, 3.7, -0.8]}>
+          <meshStandardMaterial color="#8EAFA0" roughness={0.3} metalness={0.2} />
+        </Sphere>
+      </Float>
+
+      <Float speed={0.82} rotationIntensity={0.14} floatIntensity={0.22}>
+        <CameraModel position={[-2.3, -4.0, -1.8]} />
+      </Float>
+      <Float speed={1.48} rotationIntensity={0.12} floatIntensity={0.2}>
+        <ProjectorModel position={[2.1, -3.7, -1.1]} rotation={[-0.1, -0.35, 0.08]} />
+      </Float>
+      <Float speed={0.96} rotationIntensity={0.18} floatIntensity={0.26}>
+        <ControllerModel position={[-2.1, 4.0, -1.3]} />
+      </Float>
+      <Float speed={1.62} rotationIntensity={0.14} floatIntensity={0.2}>
+        <HeadphonesModel position={[2.7, 3.3, -1.5]} />
+      </Float>
+      <Float speed={1.1} floatIntensity={0.18}>
+        <Sphere args={[0.1, 16, 16]} position={[-3.4, 0.8, -1]}>
+          <meshStandardMaterial color="#C96F52" roughness={0.4} metalness={0.2} />
+        </Sphere>
+      </Float>
+      <Float speed={1.34} floatIntensity={0.2}>
+        <Sphere args={[0.11, 16, 16]} position={[3.5, -0.8, -1.1]}>
+          <meshStandardMaterial color="#8EAFA0" roughness={0.3} metalness={0.2} />
+        </Sphere>
+      </Float>
+
+      <Float speed={1.02} rotationIntensity={0.12} floatIntensity={0.2}>
+        <CameraModel position={[0.3, -1.1, -2.2]} />
+      </Float>
+      <Float speed={1.56} rotationIntensity={0.15} floatIntensity={0.18}>
+        <ControllerModel position={[0.2, 1.3, -2.4]} />
+      </Float>
+    </group>
+  );
+};
+
+export const AmbientObjectField = () => {
+  const [isEnabled, setIsEnabled] = useState(true);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 640px), (prefers-reduced-motion: reduce)');
+    const update = () => setIsEnabled(!mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener('change', update);
+    return () => mediaQuery.removeEventListener('change', update);
+  }, []);
+
+  if (!isEnabled) return null;
+
+  return (
+    <div className="ambient-object-field" aria-hidden="true">
+      <Canvas
+        camera={{ position: [0, 0, 8.5], fov: 46 }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: true, alpha: true }}
+      >
+        <ambientLight intensity={1.05} />
+        <directionalLight position={[4, 6, 5]} intensity={1.1} color="#FFFBF0" />
+        <pointLight position={[-4, -3, 2]} intensity={0.55} color="#176B52" />
+        <Float speed={0.18} rotationIntensity={0.04} floatIntensity={0.08}>
+          <AmbientObjectScene />
+        </Float>
+      </Canvas>
+    </div>
+  );
+};
+
 export const HeroScene = () => {
   const [hasWebGL, setHasWebGL] = useState(true);
   const mouse = useRef([0, 0]);
@@ -228,7 +313,7 @@ export const HeroScene = () => {
   }
 
   return (
-    <div className="relative w-full h-[400px] sm:h-[460px] lg:h-[500px] select-none flex items-center justify-center">
+    <div className="hero-scene-stage relative w-full h-[280px] sm:h-[460px] lg:h-[500px] select-none flex items-center justify-center">
       <Suspense fallback={<FallbackHero2D />}>
         <Canvas
           camera={{ position: [0, 0, 6.8], fov: 42 }}

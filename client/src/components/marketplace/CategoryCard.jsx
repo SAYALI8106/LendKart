@@ -15,29 +15,38 @@ const iconMap = {
 
 export const CategoryCard = ({ category }) => {
   const IconComponent = iconMap[category.icon] || Package;
+  const fallbackImage = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80';
 
   return (
     <Link
       to={`/explore?category=${category.slug}`}
-      className="bg-white dark:bg-[#14211D] group p-5 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] hover:border-brand-primary/50 flex flex-col justify-between transition-all duration-300 relative overflow-hidden shadow-soft-sm hover:shadow-soft-md hover:-translate-y-0.5"
+      className="category-image-card interactive-card group min-h-[230px] rounded-2xl border border-white/20 dark:border-white/10 flex flex-col justify-end transition-all duration-300 relative overflow-hidden shadow-soft-sm hover:shadow-forest-glow"
     >
-      {/* Subtle warm hover accent */}
-      <div className="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-[#176B52]/5 group-hover:bg-[#176B52]/15 blur-xl transition-all duration-500" />
+      <img
+        src={category.image || fallbackImage}
+        alt=""
+        className="category-image absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        loading="lazy"
+        onError={(event) => {
+          event.currentTarget.onerror = null;
+          event.currentTarget.src = fallbackImage;
+        }}
+      />
+      <div className="category-image-overlay absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
 
-      <div className="flex items-center justify-between mb-4 relative z-10">
-        <div className="w-12 h-12 rounded-xl bg-[#176B52]/10 dark:bg-[#176B52]/20 border border-[#176B52]/20 flex items-center justify-center text-[#176B52] dark:text-[#8EAFA0] group-hover:scale-105 group-hover:bg-[#176B52] group-hover:text-white transition-all duration-300 shadow-xs">
-          <IconComponent className="w-6 h-6" />
+      <div className="relative z-10 p-5">
+        <div className="flex items-center justify-between mb-4">
+          <div className="w-11 h-11 rounded-2xl bg-white/90 dark:bg-[#0A1310]/90 backdrop-blur-md border border-white/40 flex items-center justify-center text-brand-primary dark:text-brand-secondary group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-md">
+            <IconComponent className="w-5 h-5" />
+          </div>
+          <span className="text-[11px] font-extrabold px-3 py-1 rounded-full bg-black/40 text-emerald-200 border border-emerald-400/30 backdrop-blur-md shadow-xs">
+            {category.itemCount || 0} gear items
+          </span>
         </div>
-        <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-[#F4F1EA] dark:bg-[#0E1714] text-[#5C6E66] dark:text-[#A8C8B5] border border-[#E7E2D6] dark:border-[#1E332B] group-hover:border-[#176B52]/30 transition-colors">
-          {category.itemCount || 0} items
-        </span>
-      </div>
-
-      <div className="relative z-10">
-        <h4 className="font-bold text-base text-[#17201D] dark:text-[#F8F6F0] group-hover:text-[#176B52] dark:group-hover:text-[#8EAFA0] transition-colors mb-1 font-display">
+        <h4 className="font-extrabold text-lg text-white group-hover:text-emerald-200 transition-colors mb-1 font-display">
           {category.name}
         </h4>
-        <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] line-clamp-2 leading-relaxed">
+        <p className="text-xs text-white/80 line-clamp-2 leading-relaxed">
           {category.description}
         </p>
       </div>
