@@ -145,8 +145,8 @@ export const HomePage = () => {
                   className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.04] text-white"
                 >
                   Why buy it when you can{' '}
-                  <span className="text-emerald-300 underline decoration-[#C96F52] decoration-wavy decoration-2 underline-offset-8">
-                    lend it?
+                  <span className="text-emerald-300 decoration-[#C96F52] decoration-wavy decoration-2 underline-offset-8">
+                    Lend it?
                   </span>
                 </motion.h1>
 
