@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Clock, ArrowLeft, Share2, Tag, CheckCircle2, User } from 'lucide-react';
+import { Clock, ArrowLeft, Share2, Tag, CheckCircle2, User, Sparkles } from 'lucide-react';
 import api from '../services/api';
 import SEO from '../components/common/SEO';
 import Skeleton from '../components/common/Skeleton';
@@ -33,21 +33,21 @@ export const BlogPostPage = () => {
 
   if (loading) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-16 space-y-6">
+      <div className="max-w-4xl mx-auto px-4 py-16 space-y-6">
         <Skeleton className="h-8 w-48 rounded" />
         <Skeleton className="h-12 w-full rounded" />
-        <Skeleton className="aspect-[16/9] w-full rounded-2xl" />
-        <Skeleton className="h-32 w-full rounded-2xl" />
+        <Skeleton className="aspect-[16/9] w-full rounded-3xl" />
+        <Skeleton className="h-48 w-full rounded-3xl" />
       </div>
     );
   }
 
   if (!blog) {
     return (
-      <div className="max-w-md mx-auto my-20 p-8 text-center bg-white dark:bg-[#14211D] rounded-2xl border border-sand-300 dark:border-[#1E332B] shadow-soft-sm">
-        <h3 className="text-xl font-bold font-serif text-charcoal-900 dark:text-sand-100 mb-2">Article Not Found</h3>
-        <p className="text-xs text-charcoal-500 mb-4">The article you requested might have been moved or updated.</p>
-        <Link to="/blog" className="text-forest-700 dark:text-forest-400 font-semibold text-xs hover:underline">
+      <div className="max-w-md mx-auto my-20 p-8 text-center bg-white dark:bg-[#14211D] rounded-3xl border border-[#E5E0D2] dark:border-white/10 shadow-soft-sm">
+        <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white mb-2">Article Not Found</h3>
+        <p className="text-xs text-[#5C6E66] mb-4">The article you requested might have been moved or updated.</p>
+        <Link to="/blog" className="text-[#176B52] dark:text-[#A8C8B5] font-bold text-xs hover:underline">
           Back to all guides
         </Link>
       </div>
@@ -55,21 +55,21 @@ export const BlogPostPage = () => {
   }
 
   return (
-    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-      <SEO title={blog.title} description={blog.excerpt} />
+    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+      <SEO title={`${blog.title} — LendKart Journal`} description={blog.excerpt} />
 
       <Link
         to="/blog"
-        className="inline-flex items-center gap-1.5 text-xs font-semibold text-charcoal-600 dark:text-charcoal-400 hover:text-forest-700 dark:hover:text-forest-400 transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B52] dark:text-[#A8C8B5] hover:text-[#125440] transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to All Guides</span>
       </Link>
 
       <div className="space-y-4">
-        <div className="flex flex-wrap items-center gap-2 text-xs text-charcoal-500 dark:text-charcoal-400">
+        <div className="flex flex-wrap items-center gap-2 text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
           {blog.tags?.map((t) => (
-            <span key={t} className="px-2.5 py-0.5 rounded-md bg-forest-50 dark:bg-forest-900/30 text-forest-700 dark:text-forest-400 font-semibold text-[11px]">
+            <span key={t} className="px-3 py-1 rounded-full bg-[#176B52]/10 dark:bg-[#176B52]/20 text-[#176B52] dark:text-emerald-300 font-bold text-[11px]">
               {t}
             </span>
           ))}
@@ -82,7 +82,7 @@ export const BlogPostPage = () => {
           <span>{formatDate(blog.createdAt)}</span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl font-bold font-serif text-charcoal-900 dark:text-sand-100 leading-tight tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-extrabold font-display text-slate-900 dark:text-white leading-tight tracking-tight">
           {blog.title}
         </h1>
 
@@ -90,17 +90,17 @@ export const BlogPostPage = () => {
           <img
             src={blog.author?.avatar}
             alt={blog.author?.name}
-            className="w-10 h-10 rounded-full object-cover border border-sand-300 dark:border-charcoal-700"
+            className="w-10 h-10 rounded-full object-cover ring-2 ring-[#176B52]/20"
           />
           <div>
-            <div className="text-xs font-bold text-charcoal-900 dark:text-sand-100">{blog.author?.name}</div>
-            <div className="text-[11px] text-charcoal-500 dark:text-charcoal-400">{blog.author?.role || 'LendKart Contributor'}</div>
+            <div className="text-xs font-bold text-slate-900 dark:text-white font-display">{blog.author?.name}</div>
+            <div className="text-[11px] text-[#5C6E66] dark:text-[#A8C8B5]">{blog.author?.role || 'LendKart Contributor'}</div>
           </div>
         </div>
       </div>
 
       {/* Cover Banner */}
-      <div className="aspect-[16/9] w-full rounded-2xl overflow-hidden border border-sand-300/80 dark:border-[#1E332B] shadow-soft-md">
+      <div className="aspect-[16/9] w-full rounded-3xl overflow-hidden border border-[#E5E0D2] dark:border-white/10 shadow-soft-md">
         <img
           src={blog.coverImage}
           alt={blog.title}
@@ -109,25 +109,25 @@ export const BlogPostPage = () => {
       </div>
 
       {/* Content */}
-      <div className="bg-white dark:bg-[#14211D] p-8 sm:p-12 rounded-2xl border border-sand-300/80 dark:border-[#1E332B] space-y-6 text-charcoal-800 dark:text-sand-200 text-sm sm:text-base leading-relaxed whitespace-pre-line shadow-soft-sm font-normal">
+      <div className="bg-white dark:bg-[#14211D] p-8 sm:p-12 rounded-3xl border border-[#E5E0D2] dark:border-white/10 space-y-6 text-slate-800 dark:text-slate-200 text-sm sm:text-base leading-relaxed whitespace-pre-line shadow-soft-sm font-normal">
         {blog.content}
       </div>
 
       {/* Related Reading */}
       {related.length > 0 && (
-        <div className="pt-12 border-t border-sand-300 dark:border-[#1E332B] space-y-6">
-          <h3 className="text-2xl font-bold font-serif text-charcoal-900 dark:text-sand-100">Recommended Reading</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="pt-12 border-t border-[#E5E0D2] dark:border-white/10 space-y-6">
+          <h3 className="text-2xl font-extrabold font-display text-slate-900 dark:text-white">Recommended Reading</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {related.map((rel) => (
               <Link
                 key={rel._id}
                 to={`/blog/${rel.slug}`}
-                className="bg-white dark:bg-[#14211D] p-4 rounded-xl border border-sand-300/80 dark:border-[#1E332B] hover:border-forest-600/40 hover:shadow-soft-md transition-all space-y-2 group"
+                className="bg-white dark:bg-[#14211D] p-4 rounded-2xl border border-[#E5E0D2] dark:border-white/10 hover:border-[#176B52]/40 hover:shadow-soft-md transition-all space-y-2 group"
               >
-                <div className="aspect-[16/10] w-full rounded-lg overflow-hidden bg-sand-200 dark:bg-charcoal-800">
+                <div className="aspect-[16/10] w-full rounded-xl overflow-hidden bg-slate-900">
                   <img src={rel.coverImage} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                 </div>
-                <h4 className="font-serif font-bold text-xs text-charcoal-900 dark:text-sand-100 group-hover:text-forest-700 dark:group-hover:text-forest-400 transition-colors line-clamp-2">
+                <h4 className="font-display font-bold text-xs text-slate-900 dark:text-white group-hover:text-[#176B52] dark:group-hover:text-emerald-300 transition-colors line-clamp-2">
                   {rel.title}
                 </h4>
               </Link>

@@ -9,11 +9,11 @@ export default {
     extend: {
       colors: {
         background: {
-          light: '#F8F6F0', // Warm Ivory / Soft Sand
+          light: '#F7F4EC', // Warm Ivory
           dark: '#0E1714'   // Deep Forest Charcoal
         },
         surface: {
-          light: '#FFFDF9',
+          light: '#FFFDF8', // Warm White
           lightCard: '#FFFFFF',
           lightBorder: '#E7E2D6',
           dark: '#14211D',
@@ -24,21 +24,21 @@ export default {
           primary: '#176B52',       // Deep Evergreen / Forest
           primaryHover: '#125440',  // Darker Forest
           primaryLight: '#E8F2ED',  // Tinted Sage White
-          secondary: '#8EAFA0',     // Soft Sage
-          secondaryHover: '#799A8B',
+          secondary: '#A8C8B5',     // Soft Sage
+          secondaryHover: '#8EAFA0',
           accent: '#C96F52',        // Warm Terracotta / Clay
           accentHover: '#B55E42',
           clayLight: '#FBEFEA',
-          sky: '#709DB3',           // Muted Dusty Sky
-          lavender: '#A294BD',      // Soft Heather
-          charcoal: '#17201D',      // Deep forest charcoal text
-          muted: '#63736D',         // Soft sage charcoal text
-          sand: '#F2EFE6'
+          sky: '#86AFC4',           // Muted Sky
+          lavender: '#B9A9D6',      // Muted Lavender
+          charcoal: '#17201D',      // Deep Charcoal
+          muted: '#5C6E66',         // Editorial Muted Charcoal
+          sand: '#EFECE2'
         }
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif']
+        display: ['Syne', 'Space Grotesk', 'Plus Jakarta Sans', 'sans-serif']
       },
       boxShadow: {
         'soft-sm': '0 1px 3px rgba(23, 32, 29, 0.04), 0 1px 2px rgba(23, 32, 29, 0.02)',

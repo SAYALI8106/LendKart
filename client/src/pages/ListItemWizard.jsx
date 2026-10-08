@@ -160,20 +160,20 @@ export const ListItemWizard = () => {
       />
 
       {/* Page Header */}
-      <div className="max-w-2xl">
-        <span className="text-xs font-bold uppercase tracking-wider text-[#176B52] dark:text-[#8EAFA0] font-display">
+      <div className="max-w-2xl space-y-1">
+        <span className="text-xs font-extrabold uppercase tracking-widest text-[#176B52] dark:text-[#A8C8B5] font-display">
           Community Lender Wizard
         </span>
-        <h1 className="text-3xl font-bold font-display text-[#17201D] dark:text-[#F8F6F0] mt-1">
+        <h1 className="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 dark:text-white mt-1">
           List Your Item on LendKart
         </h1>
-        <p className="text-xs text-[#788880] dark:text-[#7D9B8E] mt-1">
-          Complete the steps below. Your live preview card on the right updates instantly.
+        <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
+          Follow the 5 simple steps. Watch your live marketplace card update in real-time on the right.
         </p>
       </div>
 
       {/* Wizard Progress Bar */}
-      <div className="wizard-progress bg-white dark:bg-[#14211D] p-3 sm:p-4 rounded-2xl border border-[#E7E2D6] dark:border-[#1E332B] shadow-soft-sm flex items-center justify-between">
+      <div className="wizard-progress bg-white dark:bg-[#14211D] p-3 sm:p-4 rounded-3xl border border-[#E5E0D2] dark:border-white/10 shadow-soft-sm flex items-center justify-between">
         {[
           { num: 1, title: 'Basics' },
           { num: 2, title: 'Photos' },
@@ -181,21 +181,21 @@ export const ListItemWizard = () => {
           { num: 4, title: 'Rules & Location' },
           { num: 5, title: 'Review & Publish' }
         ].map((s) => (
-          <div key={s.num} className="flex items-center gap-2">
+          <div key={s.num} className="flex items-center gap-2.5">
             <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
+              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                 step > s.num
                   ? 'bg-[#176B52] text-white'
                   : step === s.num
-                  ? 'bg-[#176B52] text-white shadow-soft-sm'
-                  : 'bg-[#F4F1EA] dark:bg-[#1E332B] text-[#788880] dark:text-[#7D9B8E]'
+                  ? 'bg-[#176B52] text-white shadow-forest-glow ring-4 ring-[#176B52]/20'
+                  : 'bg-[#F7F4EC] dark:bg-[#0E1714] text-[#5C6E66] dark:text-[#A8C8B5] border border-[#E5E0D2] dark:border-white/10'
               }`}
             >
-              {step > s.num ? <Check className="w-3.5 h-3.5" /> : s.num}
+              {step > s.num ? <Check className="w-4 h-4" /> : s.num}
             </div>
             <span
-              className={`wizard-progress-label text-xs hidden md:inline font-medium ${
-                step >= s.num ? 'text-[#17201D] dark:text-[#F8F6F0]' : 'text-[#788880] dark:text-[#7D9B8E]'
+              className={`wizard-progress-label text-xs hidden md:inline font-bold font-display ${
+                step >= s.num ? 'text-slate-900 dark:text-white' : 'text-[#7F938A] dark:text-[#6F877C]'
               }`}
             >
               {s.title}

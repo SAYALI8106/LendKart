@@ -1,6 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Heart, ArrowRight } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Heart, ArrowRight, Sparkles } from 'lucide-react';
 import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import ItemCard from '../components/marketplace/ItemCard';
@@ -15,21 +15,21 @@ export const WishlistPage = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="max-w-md mx-auto my-20 p-8 text-center bg-white dark:bg-[#14211D] rounded-2xl border border-sand-300 dark:border-[#1E332B] shadow-soft-md space-y-4">
-        <div className="w-12 h-12 rounded-full bg-terracotta-500/10 text-terracotta-600 dark:text-terracotta-400 flex items-center justify-center mx-auto">
-          <Heart className="w-6 h-6" />
+      <div className="max-w-md mx-auto my-20 p-8 text-center bg-white dark:bg-[#14211D] rounded-3xl border border-[#E5E0D2] dark:border-white/10 shadow-soft-md space-y-4">
+        <div className="w-12 h-12 rounded-full bg-[#C96F52]/10 text-[#C96F52] flex items-center justify-center mx-auto">
+          <Heart className="w-6 h-6 fill-current" />
         </div>
-        <h2 className="text-xl font-bold font-serif text-charcoal-900 dark:text-sand-100">
-          Sign In to View Your Wishlist
+        <h2 className="text-2xl font-bold font-display text-slate-900 dark:text-white">
+          Sign In to View Your Saved Gear
         </h2>
-        <p className="text-xs text-charcoal-500 dark:text-charcoal-400">
+        <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5]">
           Save high-demand items for your upcoming trips, events, or studio projects.
         </p>
         <Button
           onClick={() => navigate('/login?redirect=/wishlist')}
           variant="primary"
           size="md"
-          className="w-full"
+          className="w-full !rounded-xl !bg-[#176B52] font-bold"
         >
           Sign In Now
         </Button>
@@ -40,25 +40,37 @@ export const WishlistPage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <SEO
-        title="Saved Gear Wishlist"
-        description="View and manage the items you have saved for upcoming projects on LendKart."
+        title="Saved Gear Wishlist — LendKart"
+        description="View and manage the equipment you have saved for upcoming projects on LendKart."
       />
 
-      <div className="pb-4 border-b border-sand-300 dark:border-[#1E332B]">
-        <h1 className="text-2xl sm:text-3xl font-bold font-serif text-charcoal-900 dark:text-sand-100">
-          My Saved Wishlist ({wishlistItems.length})
-        </h1>
-        <p className="text-xs text-charcoal-500 dark:text-charcoal-400 mt-1">
-          Items bookmarked for future trips, photo shoots, and events.
-        </p>
+      <div className="pb-4 border-b border-[#E5E0D2] dark:border-white/10 flex items-center justify-between">
+        <div>
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#176B52] dark:text-[#A8C8B5] font-display">
+            Personal Collection
+          </span>
+          <h1 className="text-3xl font-extrabold font-display text-slate-900 dark:text-white mt-0.5">
+            My Saved Equipment ({wishlistItems.length})
+          </h1>
+          <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] mt-0.5">
+            Equipment bookmarked for upcoming shoots, terrace screenings, and outdoor adventures.
+          </p>
+        </div>
+        <Link
+          to="/explore"
+          className="text-xs font-bold text-[#176B52] dark:text-[#A8C8B5] hover:underline flex items-center gap-1"
+        >
+          <span>Find More Gear</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
 
       {wishlistItems.length === 0 ? (
         <EmptyState
           icon={Heart}
-          title="Nothing saved yet."
-          description="Save gear you might want to rent later so you can easily find it when your event arrives."
-          actionLabel="Explore Items"
+          title="No items saved yet"
+          description="Explore our community catalog and tap the heart icon on any camera, projector, or tent to save it here."
+          actionLabel="Explore Gear Catalog"
           onAction={() => navigate('/explore')}
         />
       ) : (

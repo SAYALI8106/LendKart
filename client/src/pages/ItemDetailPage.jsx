@@ -295,23 +295,23 @@ export const ItemDetailPage = () => {
             </div>
 
             {/* Price Box */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-[#F4F1EA] dark:from-[#0A1310] dark:to-[#121E1A] border border-[#E6E1D5] dark:border-white/10 flex items-baseline justify-between shadow-xs">
+            <div className="p-5 rounded-2xl bg-[#F7F4EC] dark:bg-[#0E1714] border border-[#E5E0D2] dark:border-white/10 flex items-baseline justify-between shadow-xs">
               <div>
-                <div className="text-[10px] uppercase tracking-wider text-[#82938B] dark:text-[#7D9B8E] font-extrabold">
+                <div className="text-[10px] uppercase tracking-wider text-[#5C6E66] dark:text-[#A8C8B5] font-extrabold">
                   Daily Rental Rate
                 </div>
                 <div className="flex items-baseline gap-1 mt-0.5">
-                  <span className="text-3xl font-extrabold font-display text-brand-primary dark:text-brand-secondary">
+                  <span className="text-3xl font-extrabold font-display text-[#176B52] dark:text-emerald-400">
                     {formatINR(item.pricePerDay)}
                   </span>
-                  <span className="text-xs text-[#82938B] dark:text-[#7D9B8E]">/ day</span>
+                  <span className="text-xs text-[#5C6E66] dark:text-[#A8C8B5]">/ day</span>
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-[10px] uppercase tracking-wider text-[#82938B] dark:text-[#7D9B8E] font-extrabold">
+                <div className="text-[10px] uppercase tracking-wider text-[#5C6E66] dark:text-[#A8C8B5] font-extrabold">
                   Security Deposit
                 </div>
-                <div className="text-sm font-bold text-slate-900 dark:text-[#F8F6F0] mt-0.5">
+                <div className="text-sm font-bold text-slate-900 dark:text-white mt-0.5">
                   {formatINR(item.securityDeposit)}
                 </div>
                 <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-extrabold">100% Refundable</div>
@@ -320,27 +320,27 @@ export const ItemDetailPage = () => {
 
             {/* Owner Profile Card */}
             {item.owner && (
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#0A1310] border border-[#E6E1D5] dark:border-white/10 flex items-center justify-between shadow-xs">
+              <div className="p-4 rounded-2xl bg-[#F7F4EC] dark:bg-[#0E1714] border border-[#E5E0D2] dark:border-white/10 flex items-center justify-between shadow-xs">
                 <div className="flex items-center gap-3">
                   <img
                     src={item.owner.avatar}
                     alt={item.owner.name}
-                    className="w-12 h-12 rounded-2xl object-cover border-2 border-brand-primary/20"
+                    className="w-12 h-12 rounded-2xl object-cover ring-2 ring-[#176B52]/30"
                   />
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h4 className="font-extrabold text-sm text-slate-900 dark:text-[#F8F6F0]">{item.owner.name}</h4>
+                      <h4 className="font-extrabold text-sm text-slate-900 dark:text-white">{item.owner.name}</h4>
                       {item.owner.isVerified && (
-                        <ShieldCheck className="w-4 h-4 text-brand-primary dark:text-brand-secondary" title="Verified Super Lender" />
+                        <ShieldCheck className="w-4 h-4 text-[#176B52] dark:text-emerald-400" title="Verified Super Lender" />
                       )}
                     </div>
-                    <p className="text-xs text-[#52635B] dark:text-[#A8C8B5] flex items-center gap-1 mt-0.5 font-medium">
+                    <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] flex items-center gap-1 mt-0.5 font-medium">
                       <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
                       <span>{item.owner.rating || 4.9} Lender Rating</span>
                     </p>
                   </div>
                 </div>
-                <span className="px-3 py-1 rounded-full text-[10px] font-extrabold bg-brand-primary/10 text-brand-primary dark:text-brand-secondary border border-brand-primary/20">
+                <span className="px-3 py-1 rounded-full text-[10px] font-extrabold bg-[#176B52]/10 text-[#176B52] dark:text-emerald-400 border border-[#176B52]/20">
                   SuperLender
                 </span>
               </div>
@@ -356,14 +356,16 @@ export const ItemDetailPage = () => {
                     setIsModalOpen(true);
                   }
                 }}
+                data-cursor="RENT"
                 variant="accent"
                 size="lg"
-                className="w-full text-base font-extrabold shadow-terracotta-glow hover:scale-[1.02] transition-transform duration-200 cursor-pointer"
+                className="w-full !py-4 !rounded-2xl !bg-[#C96F52] hover:!bg-[#B55E42] !text-white text-base font-extrabold shadow-lg hover:scale-[1.02] transition-transform duration-200 cursor-pointer"
               >
-                <span>Request This Rental</span>
+                <span>Request to Rent</span>
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <div className="text-center text-[11px] font-medium text-[#82938B] dark:text-[#7D9B8E]">
-                🔒 Zero payment until the lender confirms availability.
+              <div className="text-center text-[11px] font-semibold text-[#5C6E66] dark:text-[#A8C8B5]">
+                🔒 Zero prepayment required until the lender approves your dates.
               </div>
             </div>
           </div>

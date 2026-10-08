@@ -4,42 +4,43 @@
 
 @layer base {
   :root {
-    --bg-primary: #F8F6F0;
+    --bg-primary: #F7F4EC;
+    --bg-secondary: #FFFDF8;
     --card-bg: #FFFFFF;
-    --card-border: #E6E1D5;
+    --card-border: #E5E0D2;
     --card-border-hover: #176B52;
-    --text-primary: #121B18;
-    --text-muted: #52635B;
-    --text-subtle: #82938B;
+    --text-primary: #17201D;
+    --text-muted: #5C6E66;
+    --text-subtle: #7F938A;
     --accent-primary: #176B52;
+    --accent-sage: #A8C8B5;
     --accent-clay: #C96F52;
-    --accent-sage: #8EAFA0;
-    --glow-emerald: rgba(23, 107, 82, 0.15);
-    --glow-clay: rgba(201, 111, 82, 0.15);
+    --accent-sky: #86AFC4;
+    --accent-lavender: #B9A9D6;
+    --glow-emerald: rgba(23, 107, 82, 0.12);
+    --glow-clay: rgba(201, 111, 82, 0.12);
   }
 
   .dark {
-    --bg-primary: #0A1310;
-    --card-bg: #111E1A;
-    --card-border: rgba(168, 200, 181, 0.12);
-    --card-border-hover: #8EAFA0;
-    --text-primary: #F3F6F4;
-    --text-muted: #9BB1A7;
-    --text-subtle: #687D74;
-    --accent-primary: #298E71;
-    --accent-clay: #E07A5F;
+    --bg-primary: #0E1714;
+    --bg-secondary: #14211D;
+    --card-bg: #15221E;
+    --card-border: rgba(168, 200, 181, 0.14);
+    --card-border-hover: #A8C8B5;
+    --text-primary: #F7F4EC;
+    --text-muted: #A8C8B5;
+    --text-subtle: #6F877C;
+    --accent-primary: #1E8264;
     --accent-sage: #A8C8B5;
-    --glow-emerald: rgba(41, 142, 113, 0.2);
-    --glow-clay: rgba(224, 122, 95, 0.2);
+    --accent-clay: #D97E63;
+    --accent-sky: #86AFC4;
+    --accent-lavender: #B9A9D6;
+    --glow-emerald: rgba(30, 130, 100, 0.18);
+    --glow-clay: rgba(217, 126, 99, 0.18);
   }
 
   body {
     background-color: var(--bg-primary);
-    background-image: 
-      radial-gradient(circle at 15% 15%, rgba(23, 107, 82, 0.05) 0%, transparent 40%),
-      radial-gradient(circle at 85% 85%, rgba(201, 111, 82, 0.04) 0%, transparent 40%),
-      radial-gradient(rgba(23, 107, 82, 0.06) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 24px 24px;
     color: var(--text-primary);
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
@@ -48,16 +49,9 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .dark body {
-    background-image: 
-      radial-gradient(circle at 15% 15%, rgba(41, 142, 113, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 85% 85%, rgba(224, 122, 95, 0.06) 0%, transparent 50%),
-      radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  }
-
   h1, h2, h3, .font-display {
-    font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: -0.02em;
+    font-family: 'Syne', 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.03em;
   }
 }
 

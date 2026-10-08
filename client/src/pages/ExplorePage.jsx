@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { Search, SlidersHorizontal, ArrowUpDown, X, Sparkles, Filter } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { itemService } from '../services/itemService';
 import ItemCard from '../components/marketplace/ItemCard';
 import FilterSidebar from '../components/marketplace/FilterSidebar';
@@ -48,7 +49,7 @@ export const ExplorePage = () => {
       setLoading(true);
       const params = {
         page: currentPage,
-        limit: 9,
+        limit: 12,
         sort: sortBy
       };
 
@@ -98,20 +99,24 @@ export const ExplorePage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       <SEO
-        title="Explore Rental Gear"
+        title="Explore Gear — LendKart Marketplace"
         description="Search projectors, cameras, drones, camping tents, and power tools across Indian cities on LendKart."
       />
 
-      {/* Header and Mobile Filter Trigger */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-[#E6E1D5] dark:border-white/10">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-[#F8F6F0]">
-            Explore Community Gear
+      {/* Header Banner */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5E0D2] dark:border-white/10">
+        <div className="space-y-1">
+          <div className="inline-flex items-center gap-2 text-xs font-bold text-[#176B52] dark:text-[#A8C8B5] uppercase tracking-widest font-display">
+            <Sparkles className="w-3.5 h-3.5 text-[#C96F52]" />
+            <span>Curated Community Marketplace</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-extrabold font-display text-slate-900 dark:text-white tracking-tight">
+            Explore Equipment
           </h1>
-          <p className="text-xs font-semibold text-[#52635B] dark:text-[#7D9B8E] mt-1">
-            Showing <span className="text-brand-primary dark:text-brand-secondary font-extrabold">{totalCount}</span> verified items available for instant rental
+          <p className="text-xs sm:text-sm text-[#5C6E66] dark:text-[#A8C8B5]">
+            Showing <span className="font-extrabold text-[#176B52] dark:text-emerald-400">{totalCount}</span> verified listings ready for pickup.
           </p>
         </div>
 
@@ -119,28 +124,61 @@ export const ExplorePage = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileFilterOpen(true)}
-            className="lg:hidden flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#111E1A] text-xs font-bold text-slate-900 dark:text-[#F8F6F0] border border-[#E6E1D5] dark:border-white/10 shadow-soft-sm cursor-pointer hover:border-brand-primary/50"
+            className="lg:hidden flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white dark:bg-[#14211D] text-xs font-bold text-slate-900 dark:text-white border border-[#E5E0D2] dark:border-white/10 shadow-soft-sm cursor-pointer"
           >
-            <SlidersHorizontal className="w-4 h-4 text-brand-primary dark:text-brand-secondary" />
+            <SlidersHorizontal className="w-4 h-4 text-[#176B52]" />
             <span>Filters</span>
           </button>
 
           {/* Sorting Dropdown */}
-          <div className="flex items-center gap-2 bg-white/90 dark:bg-[#111E1A]/90 px-3.5 py-2.5 rounded-2xl border border-[#E6E1D5] dark:border-white/10 text-xs font-bold text-slate-700 dark:text-[#A8C8B5] shadow-soft-sm backdrop-blur-md">
-            <ArrowUpDown className="w-3.5 h-3.5 text-brand-primary dark:text-brand-secondary" />
+          <div className="flex items-center gap-2 bg-white dark:bg-[#14211D] px-4 py-2.5 rounded-2xl border border-[#E5E0D2] dark:border-white/10 text-xs font-bold text-slate-700 dark:text-[#A8C8B5] shadow-soft-sm">
+            <ArrowUpDown className="w-3.5 h-3.5 text-[#176B52] dark:text-[#A8C8B5]" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-transparent text-xs font-bold text-slate-900 dark:text-[#F8F6F0] focus:outline-none cursor-pointer"
+              className="bg-transparent text-xs font-bold text-slate-900 dark:text-white focus:outline-none cursor-pointer"
             >
-              <option value="recommended" className="bg-white dark:bg-[#111E1A]">Recommended</option>
-              <option value="price_asc" className="bg-white dark:bg-[#111E1A]">Price: Low to High</option>
-              <option value="price_desc" className="bg-white dark:bg-[#111E1A]">Price: High to Low</option>
-              <option value="rating" className="bg-white dark:bg-[#111E1A]">Highest Rated</option>
-              <option value="newest" className="bg-white dark:bg-[#111E1A]">Newest First</option>
+              <option value="recommended" className="bg-white dark:bg-[#14211D]">Recommended</option>
+              <option value="price_asc" className="bg-white dark:bg-[#14211D]">Price: Low to High</option>
+              <option value="price_desc" className="bg-white dark:bg-[#14211D]">Price: High to Low</option>
+              <option value="rating" className="bg-white dark:bg-[#14211D]">Highest Rated</option>
+              <option value="newest" className="bg-white dark:bg-[#14211D]">Newest First</option>
             </select>
           </div>
         </div>
+      </div>
+
+      {/* Quick Category Ribbon */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <button
+          onClick={() => {
+            setSelectedCategory('all');
+            setCurrentPage(1);
+          }}
+          className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+            selectedCategory === 'all'
+              ? 'bg-[#176B52] text-white shadow-soft-sm scale-105'
+              : 'bg-white dark:bg-[#14211D] text-slate-700 dark:text-slate-300 border border-[#E5E0D2] dark:border-white/10 hover:border-[#176B52]/40'
+          }`}
+        >
+          All Categories
+        </button>
+        {categories.map((cat) => (
+          <button
+            key={cat._id}
+            onClick={() => {
+              setSelectedCategory(cat.slug);
+              setCurrentPage(1);
+            }}
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
+              selectedCategory === cat.slug
+                ? 'bg-[#176B52] text-white shadow-soft-sm scale-105'
+                : 'bg-white dark:bg-[#14211D] text-slate-700 dark:text-slate-300 border border-[#E5E0D2] dark:border-white/10 hover:border-[#176B52]/40'
+            }`}
+          >
+            {cat.name}
+          </button>
+        ))}
       </div>
 
       {/* Main Grid: Sidebar + Items */}
@@ -201,9 +239,9 @@ export const ExplorePage = () => {
 
         {/* Items Container */}
         <div className="lg:col-span-3 space-y-6">
-          {/* Quick Search Field */}
+          {/* Quick Search Input */}
           <div className="relative">
-            <Search className="w-4.5 h-4.5 text-brand-primary dark:text-brand-secondary absolute left-4 top-3.5" />
+            <Search className="w-4.5 h-4.5 text-[#176B52] dark:text-[#A8C8B5] absolute left-4 top-3.5" />
             <input
               type="text"
               value={searchQuery}
@@ -211,55 +249,58 @@ export const ExplorePage = () => {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              placeholder="Search by keywords, brand, or model (e.g. Sony, Epson, Decathlon)..."
-              className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white/90 dark:bg-[#111E1A]/90 border border-[#E6E1D5] dark:border-white/10 text-xs sm:text-sm font-medium text-slate-900 dark:text-[#F8F6F0] placeholder-slate-400 dark:placeholder-[#7D9B8E] shadow-soft-sm focus:outline-none focus:border-brand-primary backdrop-blur-md"
+              placeholder="Search by keywords, brand, or model (e.g. Epson 4K, Sony Alpha, Decathlon)..."
+              className="w-full pl-11 pr-4 py-3 rounded-2xl bg-white dark:bg-[#14211D] border border-[#E5E0D2] dark:border-white/10 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-[#5C6E66] shadow-soft-sm focus:outline-none focus:border-[#176B52] focus:ring-2 focus:ring-[#176B52]/20"
             />
           </div>
 
           {/* Cards Grid */}
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
               {[...Array(6)].map((_, i) => (
                 <ItemCardSkeleton key={i} />
               ))}
             </div>
           ) : items.length === 0 ? (
             <EmptyState
-              title="No items match your criteria"
-              description="Try adjusting your price range, choosing another city, or searching for broader terms."
+              icon={Search}
+              title="No items found matching your criteria"
+              description="Try adjusting your filters, searching for a different keyword, or resetting all filters."
               actionLabel="Reset All Filters"
               onAction={handleResetFilters}
             />
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+            >
               {items.map((item) => (
                 <ItemCard key={item._id} item={item} />
               ))}
-            </div>
+            </motion.div>
           )}
 
-          {/* Pagination */}
+          {/* Pagination Controls */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 pt-8">
-              {[...Array(totalPages)].map((_, idx) => {
-                const pageNum = idx + 1;
-                return (
-                  <button
-                    key={pageNum}
-                    onClick={() => {
-                      setCurrentPage(pageNum);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className={`w-10 h-10 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                      currentPage === pageNum
-                        ? 'bg-brand-primary text-white shadow-forest-glow scale-105'
-                        : 'bg-white dark:bg-[#111E1A] border border-[#E6E1D5] dark:border-white/10 text-slate-700 dark:text-[#A8C8B5] hover:border-brand-primary/40 hover:scale-105'
-                    }`}
-                  >
-                    {pageNum}
-                  </button>
-                );
-              })}
+            <div className="pt-8 flex items-center justify-center gap-2">
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setCurrentPage(i + 1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className={`w-10 h-10 rounded-xl text-xs font-extrabold transition-all cursor-pointer ${
+                    currentPage === i + 1
+                      ? 'bg-[#176B52] text-white shadow-soft-sm scale-105'
+                      : 'bg-white dark:bg-[#14211D] text-slate-700 dark:text-slate-300 border border-[#E5E0D2] dark:border-white/10 hover:border-[#176B52]/40'
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
             </div>
           )}
         </div>

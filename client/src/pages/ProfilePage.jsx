@@ -40,22 +40,22 @@ export const ProfilePage = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       <SEO
-        title="User Profile & Settings"
+        title="User Profile & Settings — LendKart"
         description="Manage your LendKart community account credentials, location, and verified badges."
       />
 
-      <div className="pb-4 border-b border-sand-300 dark:border-[#1E332B]">
-        <h1 className="text-2xl sm:text-3xl font-bold font-serif text-charcoal-900 dark:text-sand-100">
+      <div className="pb-4 border-b border-[#E5E0D2] dark:border-white/10">
+        <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 dark:text-white">
           Account Profile & Trust Settings
         </h1>
-        <p className="text-xs text-charcoal-500 dark:text-charcoal-400 mt-1">
+        <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] mt-1">
           Your public profile helps borrowers and lenders establish trust in your neighborhood.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         {/* Profile Summary Card */}
-        <div className="md:col-span-4 bg-white dark:bg-[#14211D] p-6 rounded-2xl border border-sand-300/80 dark:border-[#1E332B] shadow-soft-sm text-center space-y-4">
+        <div className="md:col-span-4 bg-white dark:bg-[#14211D] p-6 rounded-3xl border border-[#E5E0D2] dark:border-white/10 shadow-soft-sm text-center space-y-4">
           <div className="relative w-24 h-24 mx-auto">
             <img
               src={avatar || user?.avatar}
