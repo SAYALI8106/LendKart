@@ -16,6 +16,7 @@ import wishlistRoutes from './routes/wishlistRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import { getCategories } from './controllers/itemController.js';
 
 // Load environment variables
 dotenv.config();
@@ -74,6 +75,7 @@ app.get('/api/health', (req, res) => {
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.get('/api/categories', getCategories);
 app.use('/api/items', itemRoutes);
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/reviews', reviewRoutes);

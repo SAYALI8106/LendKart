@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Rental from '../models/Rental.js';
 import Item from '../models/Item.js';
 import Notification from '../models/Notification.js';
@@ -319,13 +320,18 @@ export const completeRental = async (req, res, next) => {
 // @access  Public
 export const getItemBookedDates = async (req, res, next) => {
   try {
+    const { itemId } = req.params;
+    if (!itemId || itemId === 'undefined' || itemId === 'null' || !mongoose.Types.ObjectId.isValid(itemId)) {
+      return res.status(200).json({ success: true, bookedRanges: [] });
+    }
+
     const rentals = await Rental.find({
-      item: req.params.itemId,
+      item: itemId,
       status: { $in: ['Approved', 'Active'] },
       endDate: { $gte: new Date() }
     }).select('startDate endDate');
 
-    const bookedRanges = rentals.map((r) => ({
+    const bookedRanges = (rentals || []).map((r) => ({
       startDate: r.startDate,
       endDate: r.endDate
     }));

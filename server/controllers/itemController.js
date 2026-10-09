@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Item from '../models/Item.js';
 import Category from '../models/Category.js';
 
@@ -32,10 +33,11 @@ export const getItems = async (req, res, next) => {
 
     // Category filter by ID or slug
     if (category && category !== 'all') {
-      if (category.match(/^[0-9a-fA-F]{24}$/)) {
-        query.category = category;
+      const catStr = String(category).trim();
+      if (/^[0-9a-fA-F]{24}$/.test(catStr)) {
+        query.category = catStr;
       } else {
-        const cat = await Category.findOne({ slug: category.toLowerCase() });
+        const cat = await Category.findOne({ slug: catStr.toLowerCase() });
         if (cat) query.category = cat._id;
       }
     }
@@ -125,7 +127,12 @@ export const getFeaturedItems = async (req, res, next) => {
 // @access  Public
 export const getItemById = async (req, res, next) => {
   try {
-    const item = await Item.findById(req.params.id)
+    const { id } = req.params;
+    if (!id || id === 'undefined' || id === 'null' || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ success: false, message: 'Item not found' });
+    }
+
+    const item = await Item.findById(id)
       .populate('category', 'name slug icon')
       .populate('owner', 'name email avatar phone location rating isVerified bio createdAt');
 
@@ -134,7 +141,7 @@ export const getItemById = async (req, res, next) => {
     }
 
     // Increment view count asynchronously
-    Item.findByIdAndUpdate(req.params.id, { $inc: { views: 1 } }).exec();
+    Item.findByIdAndUpdate(id, { $inc: { views: 1 } }).catch(() => {});
 
     res.status(200).json({
       success: true,
@@ -163,34 +170,67 @@ export const createItem = async (req, res, next) => {
       specifications
     } = req.body;
 
-    let categoryDoc;
-    if (category.match(/^[0-9a-fA-F]{24}$/)) {
-      categoryDoc = await Category.findById(category);
-    } else {
-      categoryDoc = await Category.findOne({ slug: category.toLowerCase() });
+    if (!title || !String(title).trim()) {
+      return res.status(400).json({ success: false, message: 'Item title is required' });
+    }
+    if (!description || !String(description).trim()) {
+      return res.status(400).json({ success: false, message: 'Item description is required' });
     }
 
-    if (!categoryDoc) {
-      return res.status(400).json({ success: false, message: 'Invalid category specified' });
+    let categoryDoc = null;
+    const catStr = typeof category === 'object' && category?._id ? String(category._id) : String(category || '').trim();
+
+    if (/^[0-9a-fA-F]{24}$/.test(catStr)) {
+      categoryDoc = await Category.findById(catStr);
     }
+    if (!categoryDoc && catStr) {
+      categoryDoc = await Category.findOne({ slug: catStr.toLowerCase() });
+    }
+    if (!categoryDoc && catStr) {
+      categoryDoc = await Category.findOne({ name: new RegExp(`^${catStr}$`, 'i') });
+    }
+    if (!categoryDoc) {
+      categoryDoc = await Category.findOne().sort({ itemCount: -1 });
+    }
+    if (!categoryDoc) {
+      categoryDoc = await Category.create({
+        name: 'Photography & Film',
+        slug: 'photography',
+        icon: 'Camera',
+        description: 'Cameras, lenses, lighting and studio gear'
+      });
+    }
+
+    const safeLocation = (location && String(location).trim()) || (req.user && req.user.location) || 'Pune, Maharashtra';
+    const safeImages = Array.isArray(images) && images.filter(Boolean).length > 0
+      ? images.filter(Boolean)
+      : ['https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80'];
+    const safePrice = Math.max(10, Number(pricePerDay) || 10);
+    const safeDeposit = Math.max(0, Number(securityDeposit) || 0);
+    const validConditions = ['Like New', 'Excellent', 'Good', 'Fair'];
+    const safeCondition = validConditions.includes(condition) ? condition : 'Excellent';
 
     const newItem = await Item.create({
-      title,
-      description,
+      title: String(title).trim(),
+      description: String(description).trim(),
       category: categoryDoc._id,
       categorySlug: categoryDoc.slug,
-      images: images && images.length > 0 ? images : ['https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80'],
-      pricePerDay: Number(pricePerDay),
-      securityDeposit: Number(securityDeposit || 0),
-      condition: condition || 'Excellent',
-      location: location || req.user.location,
+      images: safeImages,
+      pricePerDay: safePrice,
+      securityDeposit: safeDeposit,
+      condition: safeCondition,
+      location: safeLocation,
       owner: req.user._id,
-      rentalRules: rentalRules || [],
-      specifications: specifications || []
+      rentalRules: Array.isArray(rentalRules) && rentalRules.length > 0 ? rentalRules : [
+        'Valid ID verification required upon pickup',
+        'Return in original condition and packaging',
+        'Late returns incur additional daily charges'
+      ],
+      specifications: Array.isArray(specifications) ? specifications : []
     });
 
     // Update category count
-    await Category.findByIdAndUpdate(categoryDoc._id, { $inc: { itemCount: 1 } });
+    Category.findByIdAndUpdate(categoryDoc._id, { $inc: { itemCount: 1 } }).catch(() => {});
 
     const populatedItem = await Item.findById(newItem._id)
       .populate('category', 'name slug icon')
@@ -199,7 +239,7 @@ export const createItem = async (req, res, next) => {
     res.status(201).json({
       success: true,
       message: 'Item listed successfully on LendKart!',
-      item: populatedItem
+      item: populatedItem || newItem
     });
   } catch (error) {
     next(error);
@@ -268,9 +308,14 @@ export const deleteItem = async (req, res, next) => {
 // @access  Public
 export const getSimilarItems = async (req, res, next) => {
   try {
-    const item = await Item.findById(req.params.id);
+    const { id } = req.params;
+    if (!id || id === 'undefined' || id === 'null' || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(200).json({ success: true, items: [] });
+    }
+
+    const item = await Item.findById(id);
     if (!item) {
-      return res.status(404).json({ success: false, message: 'Item not found' });
+      return res.status(200).json({ success: true, items: [] });
     }
 
     const similar = await Item.find({
@@ -284,7 +329,7 @@ export const getSimilarItems = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      items: similar
+      items: similar || []
     });
   } catch (error) {
     next(error);

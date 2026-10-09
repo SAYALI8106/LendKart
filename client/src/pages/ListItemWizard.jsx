@@ -65,7 +65,9 @@ export const ListItemWizard = () => {
       try {
         const cats = await itemService.getCategories();
         setCategories(cats || []);
-        if (cats && cats.length > 0) setCategory(cats[0]._id);
+        if (cats && cats.length > 0) {
+          setCategory((prev) => prev || cats[0]._id);
+        }
       } catch (err) {
         console.error(err);
       }
@@ -102,6 +104,9 @@ export const ListItemWizard = () => {
         setError('Please enter a title and description');
         return;
       }
+      if (!category && categories.length > 0) {
+        setCategory(categories[0]._id);
+      }
     }
     if (step === 2) {
       if (images.length === 0) {
@@ -115,6 +120,12 @@ export const ListItemWizard = () => {
         return;
       }
     }
+    if (step === 4) {
+      if (!location.trim()) {
+        setError('Please enter a pickup location / city');
+        return;
+      }
+    }
     setStep((prev) => prev + 1);
   };
 
@@ -123,30 +134,50 @@ export const ListItemWizard = () => {
       setIsSubmitting(true);
       setError('');
 
+      if (!title.trim() || !description.trim()) {
+        setError('Please enter an item title and description');
+        setStep(1);
+        return;
+      }
+
+      if (!location.trim()) {
+        setError('Please enter a pickup location / city');
+        setStep(4);
+        return;
+      }
+
       const res = await itemService.createItem({
-        title,
-        description,
-        category,
-        condition,
-        images,
-        pricePerDay: Number(pricePerDay),
+        title: title.trim(),
+        description: description.trim(),
+        category: category || (categories[0] ? categories[0]._id : undefined),
+        condition: condition || 'Excellent',
+        images: images.length > 0 ? images : ['https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80'],
+        pricePerDay: Number(pricePerDay) || 10,
         securityDeposit: Number(securityDeposit || 0),
-        location,
-        rentalRules
+        location: location.trim(),
+        rentalRules: rentalRules || []
       });
 
-      if (res.success) {
+      if (res && (res.success || res.item)) {
+        const newItemId = res.item?._id || res.item?.id || res.data?.item?._id;
         confetti({
-          particleCount: 80,
+          particleCount: 90,
           spread: 80,
           origin: { y: 0.5 }
         });
         setTimeout(() => {
-          navigate(`/items/${res.item._id}`);
+          if (newItemId) {
+            navigate(`/items/${newItemId}`);
+          } else {
+            navigate('/explore');
+          }
         }, 1200);
+      } else {
+        setError(res?.message || 'Failed to list item. Please try again.');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to list item. Please try again.');
+      console.error('Failed to create item listing:', err);
+      setError(err.response?.data?.message || err.message || 'Failed to list item. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -564,6 +595,26 @@ export const ListItemWizard = () => {
           </div>
         </div>
       </div>
+
+      {/* Publishing Modal Overlay */}
+      {isSubmitting && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#14211D] border border-[#E5E0D2] dark:border-white/10 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl space-y-4">
+            <div className="w-16 h-16 mx-auto rounded-full bg-[#176B52]/10 dark:bg-emerald-500/20 text-[#176B52] dark:text-emerald-400 flex items-center justify-center animate-bounce">
+              <Sparkles className="w-8 h-8" />
+            </div>
+            <div>
+              <h3 className="text-xl font-extrabold font-display text-slate-900 dark:text-white">Publishing Listing</h3>
+              <p className="text-xs text-[#52635B] dark:text-[#A8C8B5] mt-1">
+                Adding your gear to the marketplace and indexing in explore...
+              </p>
+            </div>
+            <div className="w-full bg-slate-100 dark:bg-white/10 rounded-full h-1.5 overflow-hidden">
+              <div className="h-full bg-[#176B52] dark:bg-emerald-400 animate-pulse w-3/4 rounded-full" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

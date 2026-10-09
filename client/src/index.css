@@ -19,6 +19,17 @@
     --accent-lavender: #B9A9D6;
     --glow-emerald: rgba(23, 107, 82, 0.12);
     --glow-clay: rgba(201, 111, 82, 0.12);
+
+    /* Tactile Luxury Semantic Tokens */
+    --color-border: #E5E0D2;
+    --color-shadow: rgba(23, 32, 29, 0.08);
+    --color-primary: #176B52;
+    --color-primary-hover: #125440;
+    --color-primary-soft: #E8F2ED;
+    --color-accent: #C96F52;
+    --color-text: #17201D;
+    --color-text-secondary: #5C6E66;
+    --color-blush: #FBEFEA;
   }
 
   .dark {
@@ -37,6 +48,17 @@
     --accent-lavender: #B9A9D6;
     --glow-emerald: rgba(30, 130, 100, 0.18);
     --glow-clay: rgba(217, 126, 99, 0.18);
+
+    /* Tactile Luxury Semantic Tokens (Dark) */
+    --color-border: rgba(168, 200, 181, 0.14);
+    --color-shadow: rgba(0, 0, 0, 0.35);
+    --color-primary: #1E8264;
+    --color-primary-hover: #176B52;
+    --color-primary-soft: rgba(30, 130, 100, 0.15);
+    --color-accent: #D97E63;
+    --color-text: #F7F4EC;
+    --color-text-secondary: #A8C8B5;
+    --color-blush: #2A1D1A;
   }
 
   body {

@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Review from '../models/Review.js';
 import Item from '../models/Item.js';
 import User from '../models/User.js';
@@ -91,14 +92,19 @@ export const createReview = async (req, res, next) => {
 // @access  Public
 export const getItemReviews = async (req, res, next) => {
   try {
-    const reviews = await Review.find({ item: req.params.id })
+    const { id } = req.params;
+    if (!id || id === 'undefined' || id === 'null' || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(200).json({ success: true, count: 0, reviews: [] });
+    }
+
+    const reviews = await Review.find({ item: id })
       .populate('reviewer', 'name avatar location rating isVerified')
       .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
       count: reviews.length,
-      reviews
+      reviews: reviews || []
     });
   } catch (error) {
     next(error);

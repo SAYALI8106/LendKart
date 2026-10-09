@@ -12,20 +12,21 @@ import {
   Sparkles,
   Info,
   CheckCircle2,
-  ArrowLeft
+  ArrowLeft,
+  ArrowRight
 } from 'lucide-react';
 import { itemService } from '../services/itemService';
 import { rentalService } from '../services/rentalService';
 import { useAuth } from '../context/AuthContext';
 import { useWishlist } from '../context/WishlistContext';
-import { formatINR, formatDate } from '../../src/utils/formatters';
-import RentalCalendar from '../components/marketplace/RentalCalendar';
+import { formatINR, formatDate } from '../utils/formatters';
 import RentalRequestModal from '../components/marketplace/RentalRequestModal';
 import ItemCard from '../components/marketplace/ItemCard';
 import RatingStars from '../components/common/RatingStars';
 import Button from '../components/common/Button';
 import Skeleton from '../components/common/Skeleton';
 import SEO from '../components/common/SEO';
+import ErrorBoundary from '../components/common/ErrorBoundary';
 import api from '../services/api';
 
 export const ItemDetailPage = () => {
@@ -55,20 +56,31 @@ export const ItemDetailPage = () => {
         setLoading(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        const [itemData, similarData, bookedData, reviewsData] = await Promise.all([
-          itemService.getItemById(id),
-          itemService.getSimilarItems(id),
-          rentalService.getBookedDates(id),
-          api.get(`/reviews/item/${id}`).then((r) => r.data.reviews).catch(() => [])
-        ]);
+        if (!id || id === 'undefined' || id === 'null') {
+          setItem(null);
+          setLoading(false);
+          return;
+        }
 
+        const itemData = await itemService.getItemById(id);
         setItem(itemData);
-        setSimilarItems(similarData || []);
-        setBookedRanges(bookedData || []);
-        setReviews(reviewsData || []);
         setActiveImageIndex(0);
+
+        if (itemData) {
+          // Fetch secondary information without blocking main product view
+          Promise.allSettled([
+            itemService.getSimilarItems(id),
+            rentalService.getBookedDates(id),
+            api.get(`/reviews/item/${id}`).then((r) => r.data.reviews)
+          ]).then(([similarRes, bookedRes, reviewsRes]) => {
+            if (similarRes.status === 'fulfilled') setSimilarItems(similarRes.value || []);
+            if (bookedRes.status === 'fulfilled') setBookedRanges(bookedRes.value || []);
+            if (reviewsRes.status === 'fulfilled') setReviews(reviewsRes.value || []);
+          });
+        }
       } catch (err) {
         console.error('Failed to load item:', err);
+        setItem(null);
       } finally {
         setLoading(false);
       }
@@ -124,14 +136,21 @@ export const ItemDetailPage = () => {
 
   if (!item) {
     return (
-      <div className="max-w-md mx-auto my-20 p-8 text-center glass-card rounded-3xl">
-        <h3 className="text-xl font-bold font-display text-white mb-2">Item Not Found</h3>
-        <p className="text-xs text-slate-400 mb-6">
-          The gear you are looking for may have been paused, removed, or has an invalid URL.
-        </p>
-        <Link to="/explore">
-          <Button variant="primary" size="md">Browse Other Items</Button>
-        </Link>
+      <div className="max-w-md mx-auto my-20 p-8 text-center bg-white dark:bg-[#14211D] border border-[#E5E0D2] dark:border-white/10 rounded-3xl shadow-soft-md space-y-4">
+        <div className="w-14 h-14 mx-auto rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-2xl">
+          📦
+        </div>
+        <div>
+          <h3 className="text-xl font-extrabold font-display text-slate-900 dark:text-white mb-2">Item Not Found</h3>
+          <p className="text-xs text-[#52635B] dark:text-[#A8C8B5] leading-relaxed">
+            The gear you are looking for may have been paused, removed, or has an invalid listing link.
+          </p>
+        </div>
+        <div className="pt-2">
+          <Link to="/explore">
+            <Button variant="primary" size="md">Browse Other Items</Button>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -141,8 +160,8 @@ export const ItemDetailPage = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
       <SEO
-        title={`${item.title} for Rent in ${item.location}`}
-        description={`Rent ${item.title} for ${formatINR(item.pricePerDay)}/day in ${item.location}. Verified lender, instant availability on LendKart.`}
+        title={`${item.title || 'Gear'} for Rent in ${item.location || 'India'}`}
+        description={`Rent ${item.title || 'Gear'} for ${formatINR(item.pricePerDay || 0)}/day in ${item.location || 'India'}. Verified lender, instant availability on LendKart.`}
       />
 
       {/* Breadcrumb Navigation */}
@@ -323,20 +342,25 @@ export const ItemDetailPage = () => {
               <div className="p-4 rounded-2xl bg-[#F7F4EC] dark:bg-[#0E1714] border border-[#E5E0D2] dark:border-white/10 flex items-center justify-between shadow-xs">
                 <div className="flex items-center gap-3">
                   <img
-                    src={item.owner.avatar}
-                    alt={item.owner.name}
+                    src={
+                      (typeof item.owner === 'object' && item.owner?.avatar) ||
+                      `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent((typeof item.owner === 'object' && item.owner?.name) || 'Lender')}`
+                    }
+                    alt={(typeof item.owner === 'object' && item.owner?.name) || 'Lender'}
                     className="w-12 h-12 rounded-2xl object-cover ring-2 ring-[#176B52]/30"
                   />
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h4 className="font-extrabold text-sm text-slate-900 dark:text-white">{item.owner.name}</h4>
-                      {item.owner.isVerified && (
+                      <h4 className="font-extrabold text-sm text-slate-900 dark:text-white">
+                        {(typeof item.owner === 'object' && item.owner?.name) || 'Community Lender'}
+                      </h4>
+                      {typeof item.owner === 'object' && item.owner?.isVerified && (
                         <ShieldCheck className="w-4 h-4 text-[#176B52] dark:text-emerald-400" title="Verified Super Lender" />
                       )}
                     </div>
                     <p className="text-xs text-[#5C6E66] dark:text-[#A8C8B5] flex items-center gap-1 mt-0.5 font-medium">
                       <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                      <span>{item.owner.rating || 4.9} Lender Rating</span>
+                      <span>{typeof item.owner === 'object' && item.owner?.rating ? item.owner.rating : 4.9} Lender Rating</span>
                     </p>
                   </div>
                 </div>
@@ -493,4 +517,10 @@ export const ItemDetailPage = () => {
   );
 };
 
-export default ItemDetailPage;
+const ItemDetailPageWithErrorBoundary = () => (
+  <ErrorBoundary>
+    <ItemDetailPage />
+  </ErrorBoundary>
+);
+
+export default ItemDetailPageWithErrorBoundary;
