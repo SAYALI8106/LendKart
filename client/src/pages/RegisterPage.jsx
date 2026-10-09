@@ -159,7 +159,7 @@ export const RegisterPage = () => {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Phone Number (Optional)</label>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Phone Number</label>
               <div className="relative">
                 <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
